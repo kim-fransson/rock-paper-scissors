@@ -1,0 +1,44 @@
+.triggerButton {
+  min-width: 128px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  color: white;
+
+  font-family: "Barlow Semi Condensed";
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.1875rem;
+  text-align: center;
+  letter-spacing: 0.1563rem;
+
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+}
+
+.dialog {
+  color: var(--dark-text);
+  background: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.heading {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.closeButton {
+  background: none;
+  cursor: pointer;
+}
