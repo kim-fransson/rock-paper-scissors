@@ -37,7 +37,13 @@ export const Rules = () => {
           <Heading className={styles.heading} slot="title">
             RULES
           </Heading>
-          <img src={rules} alt="" className={styles.image} />
+          <img
+            width={305}
+            height={271}
+            src={rules}
+            alt=""
+            className={styles.image}
+          />
           <p className="sr-only">
             Rock beats Scissors, Scissors beats Paper, Paper beats Rock
           </p>
