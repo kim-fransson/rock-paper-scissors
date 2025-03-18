@@ -1,12 +1,11 @@
 import "./App.scss";
-import GameHeader from "./components/GameHeader";
-import RulesModal from "./components/Rules";
+import { GameHeader, Rules } from "./components";
 
 function App() {
   return (
     <>
       <GameHeader />
-      <RulesModal />
+      <Rules />
     </>
   );
 }

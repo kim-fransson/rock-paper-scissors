@@ -5,16 +5,15 @@ import {
   Heading,
   Modal,
 } from "react-aria-components";
-
-import rules from "../assets/image-rules.svg";
-import iconClose from "../assets/icon-close.svg";
-
 import { useMachine } from "@xstate/react";
-import { gameMachine } from "../rockPaperScissorsMachine";
+
+import rules from "../../assets/image-rules.svg";
+import iconClose from "../../assets/icon-close.svg";
+import { gameMachine } from "../../rockPaperScissorsMachine";
 
 import styles from "./Rules.module.scss";
 
-const Rules = () => {
+export const Rules = () => {
   const [state, send] = useMachine(gameMachine);
 
   const isRulesOpen = state.context.isRulesOpened;
@@ -51,5 +50,3 @@ const Rules = () => {
     </DialogTrigger>
   );
 };
-
-export default Rules;
