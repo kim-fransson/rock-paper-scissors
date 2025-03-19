@@ -1,19 +1,18 @@
-import { setup, assign } from "xstate";
-
-type Symbol = "ROCK" | "PAPER" | "SCISSORS";
+import { setup, assign, assertEvent } from "xstate";
+import { Gesture } from "./app.model";
 
 export const gameMachine = setup({
   types: {
     context: {} as {
-      player?: Symbol;
-      winner?: Symbol;
+      player?: Gesture;
+      winner?: Gesture;
       score: number;
-      cpu?: Symbol;
+      cpu?: Gesture;
       isRulesOpened: boolean;
     },
     events: {} as
       | { type: "user.toggleRules" }
-      | { type: "player.pickedSymbol" }
+      | { type: "player.pickedGesture"; gesture: Gesture }
       | { type: "player.playAgain" },
   },
   actions: {
@@ -27,7 +26,10 @@ export const gameMachine = setup({
       // ...
     }),
     setPlayer: assign({
-      // ...
+      player: ({ event }) => {
+        assertEvent(event, "player.pickedGesture");
+        return event.gesture;
+      },
     }),
   },
   guards: {
@@ -45,7 +47,7 @@ export const gameMachine = setup({
     isRulesOpened: false,
   },
   id: "rockPaperScissorGame",
-  initial: "pickSymbol",
+  initial: "pickGesture",
   on: {
     "user.toggleRules": {
       actions: assign(({ context }) => {
@@ -56,30 +58,30 @@ export const gameMachine = setup({
     },
   },
   states: {
-    pickSymbol: {
+    pickGesture: {
       on: {
-        "player.pickedSymbol": {
-          target: "cpuSelectSymbol",
+        "player.pickedGesture": {
+          target: "cpuSelectedGesture",
           actions: {
             type: "setPlayer",
           },
         },
       },
     },
-    cpuSelectSymbol: {
+    cpuSelectedGesture: {
       initial: "waitingForCPU",
       states: {
         waitingForCPU: {
           after: {
             "5000": {
-              target: "cpuPickedSymbol",
+              target: "cpuPickedGesture",
             },
           },
           entry: {
             type: "setCPU",
           },
         },
-        cpuPickedSymbol: {
+        cpuPickedGesture: {
           always: [
             {
               target: "#rockPaperScissorGame.gameOver.winner",
@@ -98,7 +100,7 @@ export const gameMachine = setup({
       initial: "winner",
       on: {
         "player.playAgain": {
-          target: "pickSymbol",
+          target: "pickGesture",
         },
       },
       states: {

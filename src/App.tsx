@@ -1,17 +1,18 @@
-import { GameHeader, PickSymbol, Rules } from "./components";
+import { GameHeader, Rules } from "./components";
+import { GameMachineContext } from "./context/gameMachineContext";
+import { GamePanel } from "./components/GamePanel";
 
 import styles from "./App.module.scss";
-import { useMachine } from "@xstate/react";
-import { gameMachine } from "./rockPaperScissorsMachine";
 
 function App() {
-  const [state] = useMachine(gameMachine);
   return (
-    <div className={styles.grid}>
-      <GameHeader />
-      {state.matches("pickSymbol") && <PickSymbol />}
-      <Rules />
-    </div>
+    <GameMachineContext.Provider>
+      <div className={styles.grid}>
+        <GameHeader />
+        <GamePanel />
+        <Rules />
+      </div>
+    </GameMachineContext.Provider>
   );
 }
 

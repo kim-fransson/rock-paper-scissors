@@ -5,16 +5,16 @@ import {
   Heading,
   Modal,
 } from "react-aria-components";
-import { useMachine } from "@xstate/react";
 
 import rules from "../../assets/image-rules.svg";
 import iconClose from "../../assets/icon-close.svg";
-import { gameMachine } from "../../rockPaperScissorsMachine";
 
 import styles from "./Rules.module.scss";
+import { GameMachineContext } from "../../context/gameMachineContext";
 
 export const Rules = () => {
-  const [state, send] = useMachine(gameMachine);
+  const { send } = GameMachineContext.useActorRef();
+  const state = GameMachineContext.useSelector((state) => state);
 
   const isRulesOpen = state.context.isRulesOpened;
 
