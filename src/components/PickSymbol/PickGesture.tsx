@@ -4,6 +4,7 @@ import bgTriangle from "../../assets/bg-triangle.svg";
 import styles from "./PickGesture.module.scss";
 import { Gesture } from "../../app.model";
 import { GameMachineContext } from "../../context/gameMachineContext";
+import { Paper, Rock, Scissors } from "../Gesture";
 
 export const PickGesture = () => {
   const { send } = GameMachineContext.useActorRef();
@@ -19,18 +20,21 @@ export const PickGesture = () => {
         onPress={() => handlePickGesture("PAPER")}
         className={`${styles.button} ${styles.paper}`}
       >
+        <Paper />
         <span className="sr-only">Pick paper</span>
       </Button>
       <Button
         onPress={() => handlePickGesture("ROCK")}
         className={`${styles.button} ${styles.rock}`}
       >
+        <Rock />
         <span className="sr-only">Pick rock</span>
       </Button>
       <Button
         onPress={() => handlePickGesture("SCISSORS")}
         className={`${styles.button} ${styles.scissors}`}
       >
+        <Scissors />
         <span className="sr-only">Pick scissors</span>
       </Button>
     </div>

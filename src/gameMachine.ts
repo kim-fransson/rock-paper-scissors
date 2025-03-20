@@ -72,11 +72,11 @@ export const gameMachine = setup({
       initial: "waitingForCPU",
       states: {
         waitingForCPU: {
-          after: {
-            "5000": {
-              target: "cpuPickedGesture",
-            },
-          },
+          // after: {
+          //   "5000": {
+          //     target: "cpuPickedGesture",
+          //   },
+          // },
           entry: {
             type: "setCPU",
           },
