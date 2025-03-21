@@ -1,5 +1,5 @@
 import { setup, assign, assertEvent } from "xstate";
-import { Gesture } from "./app.model";
+import { Gesture, Gestures } from "./app.model";
 
 export const gameMachine = setup({
   types: {
@@ -16,15 +16,30 @@ export const gameMachine = setup({
       | { type: "player.playAgain" },
   },
   actions: {
-    setCPU: assign({
-      // ...
-    }),
-    setWinner: assign({
-      // ...
-    }),
-    updateScore: assign({
-      // ...
-    }),
+    setCPU: function ({ context }) {
+      const randomIndex = Math.floor(Math.random() * Gestures.length);
+      context.cpu = Gestures[randomIndex];
+    },
+    determineWinner: function ({ context }) {
+      const { player, cpu } = context;
+      if (player === cpu) {
+        context.winner = undefined;
+        return;
+      }
+
+      if (
+        (player === "ROCK" && cpu === "SCISSORS") ||
+        (player === "PAPER" && cpu === "ROCK") ||
+        (player === "SCISSORS" && cpu === "PAPER")
+      ) {
+        context.winner = player;
+      } else {
+        context.winner = cpu;
+      }
+    },
+    updateScore: function ({ context }, params: { points: number }) {
+      context.score = context.score + params.points;
+    },
     setPlayer: assign({
       player: ({ event }) => {
         assertEvent(event, "player.pickedGesture");
@@ -33,12 +48,14 @@ export const gameMachine = setup({
     }),
   },
   guards: {
-    checkWin: function ({ context, event }) {
-      console.log({
-        context,
-        event,
-      });
-      return true;
+    playerWin: function ({ context }) {
+      return context.winner === context.player;
+    },
+    playerLose: function ({ context }) {
+      return context.winner === context.cpu;
+    },
+    draw: function ({ context }) {
+      return !context.winner;
     },
   },
 }).createMachine({
@@ -72,51 +89,76 @@ export const gameMachine = setup({
       initial: "waitingForCPU",
       states: {
         waitingForCPU: {
-          // after: {
-          //   "5000": {
-          //     target: "cpuPickedGesture",
-          //   },
-          // },
+          after: {
+            "5000": {
+              target: "cpuPickedGesture",
+            },
+          },
           entry: {
             type: "setCPU",
           },
+          tags: "waiting",
         },
         cpuPickedGesture: {
-          always: [
-            {
-              target: "#rockPaperScissorGame.gameOver.winner",
-              guard: {
-                type: "checkWin",
+          after: {
+            "5000": [
+              {
+                target: "#rockPaperScissorGame.win",
+                guard: {
+                  type: "playerWin",
+                },
               },
-            },
-            {
-              target: "#rockPaperScissorGame.gameOver.draw",
-            },
-          ],
+              {
+                target: "#rockPaperScissorGame.lose",
+                guard: {
+                  type: "playerLose",
+                },
+              },
+              {
+                target: "#rockPaperScissorGame.draw",
+                guard: {
+                  type: "draw",
+                },
+              },
+            ],
+          },
+          entry: {
+            type: "determineWinner",
+          },
+          tags: "ready",
         },
       },
     },
-    gameOver: {
-      initial: "winner",
+    win: {
+      entry: {
+        type: "updateScore",
+        params: {
+          points: 1,
+        },
+      },
       on: {
         "player.playAgain": {
           target: "pickGesture",
         },
       },
-      states: {
-        winner: {
-          entry: [
-            {
-              type: "setWinner",
-            },
-            {
-              type: "updateScore",
-            },
-          ],
-          tags: "winner",
+    },
+    lose: {
+      entry: {
+        type: "updateScore",
+        params: {
+          points: -1,
         },
-        draw: {
-          tags: "draw",
+      },
+      on: {
+        "player.playAgain": {
+          target: "pickGesture",
+        },
+      },
+    },
+    draw: {
+      on: {
+        "player.playAgain": {
+          target: "pickGesture",
         },
       },
     },
