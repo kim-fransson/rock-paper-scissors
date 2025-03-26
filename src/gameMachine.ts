@@ -59,6 +59,7 @@ export const gameMachine = setup({
     },
   },
 }).createMachine({
+  /** @xstate-layout N4IgpgJg5mDOIC5QCcD2BjA1gBQIYAcxkBldAS1llWQHFcBbMAYgFdYiA6AF1SigBswAJRaDYAbQAMAXUSh8qWGS5lUAOzkgAHogBsAdgBMHACwBGXboDMR3WZv6rAGhABPRGcMBfLy7RY8QhJySmo6Rg58MiwaOC4WZGZ8flxXTiisSFjYeMSpWSQQBSUVdU0dBABWfRd3BDMADjMOI3tK9rMLSUlDBp8-DBwCIlIKKloGMA50fBZsaMxs3KmAd1xlMjUoADFqAGFsAFUmLRzcLincADML5AAKSu6nyQBKJn8hoNHQiYiZuYWSwSq3WKi2u2QB0O+U0xQ2ZUKFUMuhMpjMlSsKP0ZkkVh6DVqiBMlVRAE4GvpJOjHIYjCZ+iAPoERiFxuEpv95jE4sDprMuZgsjzEiczhcONdbg8nm8mcNgmMwpM+QDuTleZyFkL1XkZLDFPCNIi9JYWpJKVZDKT0eTcYSEFYTKSOJZ9KT9LpcY0zKT6b5GYNmQqfuyVQKgYkw1qIBHmKcuOdLjciNLurLA-LvmzlZq1cso5kY8KwOIzAV5AbSkbQBVLLozRarTaGna3ESSRxyZTqZa6ZJKgy5V9WUq-vzAcWC4Kizq42Kk1LHmn3hnh4rfhzx3mNVvp7HxIZy0VK6pq9oTfXKY3rZVbc421VMRwGtbHW77DiTPpB6uWevQysmxMMkqTpCkrgAIJQOsagwoUcJVuUHg4vWX7WiYFJWJULaOvajoNBwFg0iY1gYpUZg-gEmYjhuHD8IoSTgWBqRQTBcEViUp5IfUZjEhwkiWFYFIUtYvomPaxJWKYDTWCiViYoY7S6JRnx-iGyoQMguArMBTHIJE4GsZs7HHpxCI1ogpKkpUHBYb6uJKboOH2mRtmkgJpK6ORgkoj4-pqKgEBwJoQ5qdmjD6mZZ4VAAtOJD6+m5DQmCY5qpS+7qkipQZZqOUwZIsxaRYa3H2I6LpmNijz6C2qXEvahg+hwhgta6GKVZIvp9P6oXBuFm6qoVs7FYhxoICleEmMY1oGN0TQtSSinZdR-45rusYcGsGzgvsRwjVxY2koYEl4s1Vieei2FWiS+h+gMVFrupY6DRtuZ7kV8EnuZ57jVSzWeTJjXmk0XnxXUJinYY512O0DTXV+d0Bg9YV5Ztmz7d9FTucY50Cci1oNEJvp4YYZKGP2+jYXD-Y9Mtj39XRDEY9FlmpZ2+g1ZY-Yvi2lQnZIZ3WRSvq6O5WEDj1v59ajmnacz3HuTZDQko0jVfj6-YuVhHCw15lS9EJt5WH5XhAA */
   context: {
     score: 0,
     isRulesOpened: false,
@@ -78,19 +79,19 @@ export const gameMachine = setup({
     pickGesture: {
       on: {
         "player.pickedGesture": {
-          target: "cpuSelectedGesture",
+          target: "cpuPickGesture",
           actions: {
             type: "setPlayer",
           },
         },
       },
     },
-    cpuSelectedGesture: {
+    cpuPickGesture: {
       initial: "waitingForCPU",
       states: {
         waitingForCPU: {
           after: {
-            "5000": {
+            "1000": {
               target: "cpuPickedGesture",
             },
           },
@@ -101,7 +102,7 @@ export const gameMachine = setup({
         },
         cpuPickedGesture: {
           after: {
-            "5000": [
+            "1000": [
               {
                 target: "#rockPaperScissorGame.win",
                 guard: {
@@ -141,6 +142,7 @@ export const gameMachine = setup({
           target: "pickGesture",
         },
       },
+      tags: "gameOver",
     },
     lose: {
       entry: {
@@ -154,6 +156,7 @@ export const gameMachine = setup({
           target: "pickGesture",
         },
       },
+      tags: "gameOver",
     },
     draw: {
       on: {
@@ -161,6 +164,7 @@ export const gameMachine = setup({
           target: "pickGesture",
         },
       },
+      tags: "gameOver",
     },
   },
 });

@@ -18,3 +18,6 @@ const Gesture: React.FC<GestureProps> = ({ gesture }) => {
 export const Paper = () => <Gesture gesture="PAPER" />;
 export const Rock = () => <Gesture gesture="ROCK" />;
 export const Scissors = () => <Gesture gesture="SCISSORS" />;
+export const Loading = () => (
+  <div className={`${styles.gesture} ${styles.loading}`}></div>
+);

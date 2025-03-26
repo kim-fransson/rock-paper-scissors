@@ -1,28 +1,61 @@
 .wrapper {
   max-width: 188px;
   position: relative;
+  place-self: center;
 }
 
 .button {
   position: absolute;
-  background: none;
+  min-width: 130px;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  color: var(--dark-text);
   cursor: pointer;
 
+  &::before {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: calc(50% + 2.5px); // make it look more centered
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    aspect-ratio: 1 / 1;
+    border-radius: inherit;
+    background: #e7e7e7;
+    box-shadow: 0 -5px 0 #babfd4;
+  }
+
   &.paper {
+    background: var(--paper-gradient);
+    box-shadow: 0 5px 0 var(--paper-shadow), 0px 3px 3px var(--button-shadow);
     top: 0;
     left: 0;
     translate: -50% -50%;
   }
+  &.paper::before {
+    content: url("../../assets/icon-paper.svg");
+  }
 
   &.rock {
+    background: var(--rock-gradient);
+    box-shadow: 0 5px 0 var(--rock-shadow), 0px 3px 3px var(--button-shadow);
     bottom: 0;
     left: 50%;
     translate: -50% 50%;
   }
+  &.rock::before {
+    content: url("../../assets/icon-rock.svg");
+  }
 
   &.scissors {
+    background: var(--scissors-gradient);
+    box-shadow: 0 5px 0 var(--scissors-shadow), 0px 3px 3px var(--button-shadow);
     top: 0;
     right: 0;
     translate: 50% -50%;
+  }
+  &.scissors::before {
+    content: url("../../assets/icon-scissors.svg");
   }
 }
