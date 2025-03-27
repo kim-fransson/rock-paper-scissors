@@ -1,7 +1,9 @@
 .grid {
   display: grid;
-  gap: 50px;
   grid-template-columns: 1fr;
   grid-template-rows: min-content 1fr min-content;
   align-items: start;
+  gap: 50px;
+  min-height: 100svh;
+  padding: 32px;
 }

@@ -91,7 +91,7 @@ export const gameMachine = setup({
       states: {
         waitingForCPU: {
           after: {
-            "1000": {
+            "100000": {
               target: "cpuPickedGesture",
             },
           },

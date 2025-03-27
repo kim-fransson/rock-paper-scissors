@@ -9,8 +9,9 @@ import {
 import rules from "../../assets/image-rules.svg";
 import iconClose from "../../assets/icon-close.svg";
 
-import styles from "./Rules.module.scss";
 import { GameMachineContext } from "../../context/gameMachineContext";
+
+import styles from "./Rules.module.scss";
 
 export const Rules = () => {
   const { send } = GameMachineContext.useActorRef();

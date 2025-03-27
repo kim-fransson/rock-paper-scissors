@@ -1,8 +1,8 @@
-.wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  margin-top: 50px;
+.playerCpuGestureWrapper {
+  grid-column: 1 / span 2;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
 }
 
 .textGestureWrapper {

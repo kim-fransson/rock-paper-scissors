@@ -1,4 +1,4 @@
-import { Button } from "react-aria-components";
+// import { Button } from "react-aria-components";
 import { GameMachineContext } from "../../context/gameMachineContext";
 import { Loading, Paper, Rock, Scissors } from "../Gesture";
 
@@ -10,34 +10,40 @@ const gestureMap = {
   SCISSORS: <Scissors />,
 };
 
-const textMap: Record<string, string> = {
-  win: "you win",
-  lose: "you lose",
-  draw: "draw",
-};
+// const textMap: Record<string, string> = {
+//   win: "you win",
+//   lose: "you lose",
+//   draw: "draw",
+// };
 
 export const CPUPickGesture = () => {
   const state = GameMachineContext.useSelector((state) => state);
-  const { send } = GameMachineContext.useActorRef();
+  // const { send } = GameMachineContext.useActorRef();
 
-  const handlePlayAgain = () => {
-    send({ type: "player.playAgain" });
-  };
-  const gameOver = state.hasTag("gameOver");
+  // const handlePlayAgain = () => {
+  //   send({ type: "player.playAgain" });
+  // };
+  // const gameOver = state.hasTag("gameOver");
 
   return (
-    <div className={styles.wrapper}>
-      <div className={`${styles.textGestureWrapper} ${styles.player}`}>
-        {gestureMap[state.context.player!]}
-        <span>you picked</span>
+    <>
+      <div className={styles.playerCpuGestureWrapper}>
+        <div className={`${styles.textGestureWrapper} ${styles.player}`}>
+          {gestureMap[state.context.player!]}
+          <span>you picked</span>
+        </div>
+
+        <div className={`${styles.textGestureWrapper} ${styles.cpu}`}>
+          {state.hasTag("waiting") ? (
+            <Loading />
+          ) : (
+            gestureMap[state.context.cpu!]
+          )}
+          <span>the house picked</span>
+        </div>
       </div>
 
-      <div className={`${styles.textGestureWrapper} ${styles.cpu}`}>
-        {state.hasTag("waiting") ? <Loading /> : gestureMap[state.context.cpu!]}
-        <span>the house picked</span>
-      </div>
-
-      {gameOver && (
+      {/* {gameOver && (
         <div className={styles.gameOverWrapper}>
           <span className={styles.gameOverText}>
             {textMap[state.value as string]}
@@ -49,7 +55,7 @@ export const CPUPickGesture = () => {
             play again
           </Button>
         </div>
-      )}
-    </div>
+      )} */}
+    </>
   );
 };

@@ -2,6 +2,9 @@
   max-width: 188px;
   position: relative;
   place-self: center;
+  align-self: center;
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
 }
 
 .button {
