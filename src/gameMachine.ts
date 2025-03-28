@@ -1,5 +1,5 @@
 import { setup, assign, assertEvent } from "xstate";
-import { Gesture, Gestures } from "./app.model";
+import { beatMapper, Gesture, Gestures } from "./app.model";
 
 export const gameMachine = setup({
   types: {
@@ -27,11 +27,7 @@ export const gameMachine = setup({
         return;
       }
 
-      if (
-        (player === "ROCK" && cpu === "SCISSORS") ||
-        (player === "PAPER" && cpu === "ROCK") ||
-        (player === "SCISSORS" && cpu === "PAPER")
-      ) {
+      if (beatMapper[player!].includes(cpu!)) {
         context.winner = player;
       } else {
         context.winner = cpu;
