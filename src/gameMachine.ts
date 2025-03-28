@@ -62,6 +62,7 @@ export const gameMachine = setup({
   context: {
     score: 0,
     isRulesOpened: false,
+    isSettingsOpened: false,
   },
   id: "rockPaperScissorGame",
   initial: "idle",
