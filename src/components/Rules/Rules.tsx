@@ -1,10 +1,10 @@
 import { Dialog, DialogTrigger, Heading, Modal } from "react-aria-components";
 
 import rules from "../../assets/image-rules.svg";
-import iconClose from "../../assets/icon-close.svg";
 
 import { GameMachineContext } from "../../context/gameMachineContext";
 import { Button } from "../ui";
+import { FaXmark } from "react-icons/fa6";
 
 import styles from "./Rules.module.scss";
 
@@ -48,7 +48,7 @@ export const Rules = () => {
             Rock beats Scissors, Scissors beats Paper, Paper beats Rock
           </p>
           <Button variant="icon" onPress={handleOnOpenChange}>
-            <img src={iconClose} alt="" />
+            <FaXmark size={30} />
             <span className="sr-only">Close modal</span>
           </Button>
         </Dialog>

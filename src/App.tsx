@@ -1,8 +1,7 @@
-import { GameHeader, Rules } from "./components";
 import { GameMachineContext } from "./context/gameMachineContext";
-import { GamePanel } from "./components/GamePanel";
 
 import styles from "./App.module.scss";
+import { GameFooter, GameHeader, GamePanel } from "./components";
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
       <div className={styles.grid}>
         <GameHeader />
         <GamePanel />
-        <Rules />
+        <GameFooter />
       </div>
     </GameMachineContext.Provider>
   );
