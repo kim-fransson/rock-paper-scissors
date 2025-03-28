@@ -1,13 +1,23 @@
 import { Dialog, DialogTrigger, Popover, Heading } from "react-aria-components";
-import { Button } from "../ui";
+import useSound from "use-sound";
 import { FaGear } from "react-icons/fa6";
+
 import { GameMachineContext } from "../../context/gameMachineContext";
 import { RadioGroup, Radio, Label } from "react-aria-components";
 import { Difficulty, GameMode } from "../../app.model";
+import bubble from "../../assets/bubble.wav";
+import pop1 from "../../assets/pop-1.wav";
+import pop3 from "../../assets/pop-3.wav";
+
+import { Button } from "../ui";
 
 import styles from "./GameSettings.module.scss";
 
 export const GameSettings = () => {
+  const [play] = useSound(bubble, { volume: 0.5 });
+  const [playOpen] = useSound(pop1, { volume: 0.5 });
+  const [playClose] = useSound(pop3, { volume: 0.5 });
+
   const { send } = GameMachineContext.useActorRef();
   const state = GameMachineContext.useSelector((state) => state);
 
@@ -15,14 +25,21 @@ export const GameSettings = () => {
   const { difficulty, gameMode } = state.context.settings;
 
   const handleOnOpenChange = () => {
+    if (isSettingsOpened) {
+      playClose();
+    } else {
+      playOpen();
+    }
     send({ type: "player.toggleSettings" });
   };
 
   const handleDifficultyChange = (difficulty: string) => {
+    play();
     state.context.settings.difficulty = difficulty as Difficulty;
   };
 
   const handleGameModeChange = (gameMode: string) => {
+    play();
     state.context.settings.gameMode = gameMode as GameMode;
   };
 
