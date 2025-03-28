@@ -59,7 +59,7 @@ export const gameMachine = setup({
     },
   },
 }).createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QCcD2BjA1gBQIYAcxkBldAS1llWQHFcBbMAYgFdYiA6AF1SigBswAJRaDYAbQAMAXUSh8qWGS5lUAOzkgAHogBsAdgBMHACwBGXboDMR3WZv6rAGhABPRGcMBfLy7RY8QhJySmo6Rg58MiwaOC4WZGZ8flxXTiisSFjYeMSpWSQQBSUVdU0dBABWfRd3BDMADjMOI3tK9rMLSUlDBp8-DBwCIlIKKloGMA50fBZsaMxs3KmAd1xlMjUoADFqAGFsAFUmLRzcLincADML5AAKSu6nyQBKJn8hoNHQiYiZuYWSwSq3WKi2u2QB0O+U0xQ2ZUKFUMuhMpjMlSsKP0ZkkVh6DVqiBMlVRAE4GvpJOjHIYjCZ+iAPoERiFxuEpv95jE4sDprMuZgsjzEiczhcONdbg8nm8mcNgmMwpM+QDuTleZyFkL1XkZLDFPCNIi9JYWpJKVZDKT0eTcYSEFYTKSOJZ9KT9LpcY0zKT6b5GYNmQqfuyVQKgYkw1qIBHmKcuOdLjciNLurLA-LvmzlZq1cso5kY8KwOIzAV5AbSkbQBVLLozRarTaGna3ESSRxyZTqZa6ZJKgy5V9WUq-vzAcWC4Kizq42Kk1LHmn3hnh4rfhzx3mNVvp7HxIZy0VK6pq9oTfXKY3rZVbc421VMRwGtbHW77DiTPpB6uWevQysmxMMkqTpCkrgAIJQOsagwoUcJVuUHg4vWX7WiYFJWJULaOvajoNBwFg0iY1gYpUZg-gEmYjhuHD8IoSTgWBqRQTBcEViUp5IfUZjEhwkiWFYFIUtYvomPaxJWKYDTWCiViYoY7S6JRnx-iGyoQMguArMBTHIJE4GsZs7HHpxCI1ogpKkpUHBYb6uJKboOH2mRtmkgJpK6ORgkoj4-pqKgEBwJoQ5qdmjD6mZZ4VAAtOJD6+m5DQmCY5qpS+7qkipQZZqOUwZIsxaRYa3H2I6LpmNijz6C2qXEvahg+hwhgta6GKVZIvp9P6oXBuFm6qoVs7FYhxoICleEmMY1oGN0TQtSSinZdR-45rusYcGsGzgvsRwjVxY2koYEl4s1Vieei2FWiS+h+gMVFrupY6DRtuZ7kV8EnuZ57jVSzWeTJjXmk0XnxXUJinYY512O0DTXV+d0Bg9YV5Ztmz7d9FTucY50Cci1oNEJvp4YYZKGP2+jYXD-Y9Mtj39XRDEY9FlmpZ2+g1ZY-Yvi2lQnZIZ3WRSvq6O5WEDj1v59ajmnacz3HuTZDQko0jVfj6-YuVhHCw15lS9EJt5WH5XhAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QCcD2BjA1gBQIYAcxkBldAS1llWQHFcBbMAYgFdYiA6AF1SigBswAJRaDYAbQAMAXUSh8qWGS5lUAOzkgAHogBsAdn0cArAEZ9ugMwAOAJwAmG5YAslgDQgAnolP2Avn4eaFh4hCTklNR0jBz4ZFg0cFwsyMz4-LienHFYkImwyalSskggCkoq6po6CMb6Ht4IptamJrYWjoaWBpaSzgFBGDgERKQUVLQMYBzo+CzY8Zj5hdMA7rjKZGpQAGLUAMLYAKpMWgW4XNO4AGaXyAAU9saSkgCUTMHDYWORkzGz80WyxSaw2Km2e2QhyOxU05U2VVKNSezg49msZl0kieums1kk+nsDUQzmMqPxplJ2N09l0xhpugGIE+oVGEQm0WmAIWCSSIJmcx5mDyfNSp3Olw4Nzuj2ebw+Q1Z4XGUSmAsBvIK-O5ixFWqKMjhigRGiRejJHEs9Os6P0tlMtmepmJCBctg4zhtznszkkNId5iZLJGyt+nPVQuBqQjuogUeYZy4FyutyIspe72D33Zqv+gqBoq5+dyccL4lMJXkxsqptANTpqKtuNt9sdkmdXhJFopzl0vgdfvspiDipDPw5ap1mpWMZL8fFScl0rTTwzCpCY5zfyLGqWhdnwtL+rA4nslbK1dUte05sb1pbDqdLuM3Q4+kkdWsrjJ9gslhHG7Ziq24cKsWxMOkmTZBkngAIJQBsaiwqU8I1tUPimH6HCYeYNi2M4vYuPUnaus4Ri2C0hgEWSdS4gBXxssB4b8IoaQwdBmTwYhyFVhUV7oU0lKWCY5iYS+lj2LSuguqSwm9JILSmH2lJkf+gTMqOQFhmqEDILgqwQexyCxDBXFbDxF58YidaILY+GWq4GKEr+-Ydo0L7GGiH6mERva6H2anqWoqAQHAmhZox2mMEaVnXjUAC0zguvZv5keYtgEoS2JqYMgGRROMQ5Hux4xSaAk+QRHAOJYLh2N6NWmG5iDGI4lq0p0GKuH29FKuOuY7pGhalWhZoIARLouPYb6WI1dKUtYLievoPWbkxk7FsVM7rJsEIHMcw38aNDgyb0HAfr6pIEbYVp+st6kRaGBUDQWx4HnqKwHdZN6uni2H6AGxiUTi7gka4khnWSfRks413PAYK1aU9oFbJ9cW2S8VX-b6+i9r6dTEY0EmovoN0KfYDietiCP5f1HAsewqMCdd1iWtYBgkxiSl2ESoOnedUNXTd8P3ZpNMgbp+mM0dkjCfazg+Rz9JWLYz5WpaJNk1iNJDsOAR+EAA */
   context: {
     score: 0,
     isRulesOpened: false,
@@ -91,18 +91,18 @@ export const gameMachine = setup({
       states: {
         waitingForCPU: {
           after: {
-            "100000": {
+            "2500": {
               target: "cpuPickedGesture",
             },
           },
-          entry: {
+          exit: {
             type: "setCPU",
           },
           tags: "waiting",
         },
         cpuPickedGesture: {
           after: {
-            "1000": [
+            "2500": [
               {
                 target: "#rockPaperScissorGame.win",
                 guard: {
