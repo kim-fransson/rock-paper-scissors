@@ -14,9 +14,9 @@ import { Button } from "../ui";
 import styles from "./GameSettings.module.scss";
 
 export const GameSettings = () => {
-  const [play] = useSound(bubble, { volume: 0.5 });
-  const [playOpen] = useSound(pop1, { volume: 0.5 });
-  const [playClose] = useSound(pop3, { volume: 0.5 });
+  const [play] = useSound(bubble, { volume: 0.05 });
+  const [playOpen] = useSound(pop1, { volume: 0.1 });
+  const [playClose] = useSound(pop3, { volume: 0.1 });
 
   const { send } = GameMachineContext.useActorRef();
   const state = GameMachineContext.useSelector((state) => state);
