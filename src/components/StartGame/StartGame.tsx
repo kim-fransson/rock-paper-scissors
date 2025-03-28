@@ -1,5 +1,5 @@
-import { Button } from "react-aria-components";
 import { GameMachineContext } from "../../context/gameMachineContext";
+import { Button } from "../ui";
 
 import styles from "./StartGame.module.scss";
 

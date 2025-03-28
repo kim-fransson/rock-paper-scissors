@@ -1,15 +1,10 @@
-import {
-  Button,
-  Dialog,
-  DialogTrigger,
-  Heading,
-  Modal,
-} from "react-aria-components";
+import { Dialog, DialogTrigger, Heading, Modal } from "react-aria-components";
 
 import rules from "../../assets/image-rules.svg";
 import iconClose from "../../assets/icon-close.svg";
 
 import { GameMachineContext } from "../../context/gameMachineContext";
+import { Button } from "../ui";
 
 import styles from "./Rules.module.scss";
 
@@ -25,7 +20,11 @@ export const Rules = () => {
 
   return (
     <DialogTrigger>
-      <Button onPress={handleOnOpenChange} className={styles.triggerButton}>
+      <Button
+        variant="secondary"
+        onPress={handleOnOpenChange}
+        className={styles.triggerBtn}
+      >
         Rules
       </Button>
       <Modal
@@ -48,7 +47,7 @@ export const Rules = () => {
           <p className="sr-only">
             Rock beats Scissors, Scissors beats Paper, Paper beats Rock
           </p>
-          <Button className={styles.closeButton} onPress={handleOnOpenChange}>
+          <Button variant="icon" onPress={handleOnOpenChange}>
             <img src={iconClose} alt="" />
             <span className="sr-only">Close modal</span>
           </Button>

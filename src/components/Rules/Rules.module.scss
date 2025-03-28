@@ -1,20 +1,5 @@
-.triggerButton {
-  min-width: 128px;
+.triggerBtn {
   justify-self: center;
-  height: 40px;
-  background: transparent;
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  color: white;
-
-  font-family: "Barlow Semi Condensed";
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.1875rem;
-  text-align: center;
-  letter-spacing: 0.1563rem;
-
-  cursor: pointer;
 }
 
 .modal {
@@ -37,9 +22,4 @@
   font-weight: 700;
   font-size: 2rem;
   line-height: 2rem;
-}
-
-.closeButton {
-  background: none;
-  cursor: pointer;
 }

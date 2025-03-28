@@ -1,6 +1,6 @@
-import { Button } from "react-aria-components";
 import styles from "./PlayAgain.module.scss";
 import { GameMachineContext } from "../../context/gameMachineContext";
+import { Button } from "../ui";
 
 const textMap: Record<string, string> = {
   win: "you win",
@@ -20,9 +20,7 @@ export const PlayAgain = () => {
       <span className={styles.gameOverText}>
         {textMap[state.value as string]}
       </span>
-      <Button onPress={() => handlePlayAgain()} className={styles.playAgainBtn}>
-        play again
-      </Button>
+      <Button onPress={() => handlePlayAgain()}>play again</Button>
     </div>
   );
 };
