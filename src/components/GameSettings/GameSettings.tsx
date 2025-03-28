@@ -1,9 +1,9 @@
 import { Dialog, DialogTrigger, Popover, Heading } from "react-aria-components";
 import { Button } from "../ui";
 import { FaGear } from "react-icons/fa6";
+import { GameMachineContext } from "../../context/gameMachineContext";
 
 import styles from "./GameSettings.module.scss";
-import { GameMachineContext } from "../../context/gameMachineContext";
 
 export const GameSettings = () => {
   const { send } = GameMachineContext.useActorRef();
@@ -12,11 +12,15 @@ export const GameSettings = () => {
   const isSettingsOpened = state.context.isSettingsOpened;
 
   const handleOnOpenChange = () => {
-    send({ type: "user.toggleSettings" });
+    send({ type: "player.toggleSettings" });
   };
   return (
     <DialogTrigger>
-      <Button variant="icon" className={styles.triggerBtn}>
+      <Button
+        onPress={handleOnOpenChange}
+        variant="icon"
+        className={styles.triggerBtn}
+      >
         <FaGear size={30} />
         <span className="sr-only">toggle game settings</span>
       </Button>

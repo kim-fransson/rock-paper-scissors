@@ -15,7 +15,7 @@ export const Rules = () => {
   const isRulesOpen = state.context.isRulesOpened;
 
   const handleOnOpenChange = () => {
-    send({ type: "user.toggleRules" });
+    send({ type: "player.toggleRules" });
   };
 
   return (
