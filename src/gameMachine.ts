@@ -1,5 +1,5 @@
 import { setup, assign, assertEvent } from "xstate";
-import { beatMapper, Gesture, Gestures } from "./app.model";
+import { beatMapper, Gesture, gestures, Settings } from "./app.model";
 
 export const gameMachine = setup({
   types: {
@@ -10,6 +10,7 @@ export const gameMachine = setup({
       cpu?: Gesture;
       isRulesOpened: boolean;
       isSettingsOpened: boolean;
+      settings: Settings;
     },
     events: {} as
       | { type: "player.toggleRules" }
@@ -20,8 +21,37 @@ export const gameMachine = setup({
   },
   actions: {
     setCPU: function ({ context }) {
-      const randomIndex = Math.floor(Math.random() * Gestures.length);
-      context.cpu = Gestures[randomIndex];
+      let gesture: Gesture;
+      switch (context.settings.difficulty) {
+        case "random": {
+          const index = Math.floor(Math.random() * gestures.length);
+          gesture = gestures[index];
+          break;
+        }
+        case "tactician": {
+          if (!context.cpu) {
+            const index = Math.floor(Math.random() * gestures.length);
+            gesture = gestures[index];
+            // what was cpu previous game, and did cpu won
+          } else if (context.winner === context.cpu) {
+            const index = (gestures.indexOf(context.cpu) + 1) % gestures.length;
+            gesture = gestures[index];
+          } else {
+            const index =
+              (gestures.indexOf(context.cpu) - 1 + gestures.length) %
+              gestures.length;
+            gesture = gestures[index];
+          }
+          break;
+        }
+        case "unfair": {
+          gesture = Object.keys(beatMapper).find((key) =>
+            beatMapper[key as Gesture].includes(context.player!)
+          ) as Gesture;
+          break;
+        }
+      }
+      context.cpu = gesture;
     },
     determineWinner: function ({ context }) {
       const { player, cpu } = context;
@@ -63,6 +93,9 @@ export const gameMachine = setup({
     score: 0,
     isRulesOpened: false,
     isSettingsOpened: false,
+    settings: {
+      difficulty: "random",
+    },
   },
   id: "rockPaperScissorGame",
   initial: "idle",

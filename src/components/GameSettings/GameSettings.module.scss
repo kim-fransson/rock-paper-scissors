@@ -9,7 +9,67 @@
 .popover {
   background: linear-gradient(0deg, #f3f3f3 0%, #ffffff 100%);
   color: var(--dark-text);
-  padding: 8px;
+  padding: 20px;
   border-radius: 8px;
-  min-width: 120px;
+  min-width: 200px;
+}
+
+.dialog {
+  display: grid;
+  gap: 16px;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+}
+
+.difficulty {
+  display: grid;
+  gap: 12px;
+}
+
+.difficultyRadio {
+  display: flex;
+  align-items: center;
+  gap: 0.571rem;
+  cursor: pointer;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 1.286rem;
+    height: 1.286rem;
+    box-sizing: border-box;
+    border: 0.143rem solid var(--dark-text);
+    border-radius: 100%;
+    transition: all 200ms;
+  }
+
+  // &[data-pressed]:before {
+  //   border-color: var(--border-color-pressed);
+  // }
+
+  &[data-selected] {
+    &:before {
+      // border-color: var(--highlight-background);
+      border-width: 0.429rem;
+    }
+
+    // &[data-pressed]:before {
+    //   border-color: var(--highlight-background-pressed);
+    // }
+  }
+
+  // &[data-focus-visible]:before {
+  //   outline: 2px solid var(--focus-ring-color);
+  //   outline-offset: 2px;
+  // }
 }
