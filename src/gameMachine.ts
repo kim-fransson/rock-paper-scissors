@@ -12,6 +12,7 @@ export const gameMachine = setup({
     },
     events: {} as
       | { type: "user.toggleRules" }
+      | { type: "player.startGame" }
       | { type: "player.pickedGesture"; gesture: Gesture }
       | { type: "player.playAgain" },
   },
@@ -55,13 +56,13 @@ export const gameMachine = setup({
     },
   },
 }).createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QCcD2BjA1gBQIYAcxkBldAS1llWQHFcBbMAYgFdYiA6AF1SigBswAJRaDYAbQAMAXUSh8qWGS5lUAOzkgAHogBsAdn0cArAEZ9ugMwAOAJwAmG5YAslgDQgAnolP2Avn4eaFh4hCTklNR0jBz4ZFg0cFwsyMz4-LienHFYkImwyalSskggCkoq6po6CMb6Ht4IptamJrYWjoaWBpaSzgFBGDgERKQUVLQMYBzo+CzY8Zj5hdMA7rjKZGpQAGLUAMLYAKpMWgW4XNO4AGaXyAAU9saSkgCUTMHDYWORkzGz80WyxSaw2Km2e2QhyOxU05U2VVKNSezg49msZl0kieums1kk+nsDUQzmMqPxplJ2N09l0xhpugGIE+oVGEQm0WmAIWCSSIJmcx5mDyfNSp3Olw4Nzuj2ebw+Q1Z4XGUSmAsBvIK-O5ixFWqKMjhigRGiRejJHEs9Os6P0tlMtmepmJCBctg4zhtznszkkNId5iZLJGyt+nPVQuBqQjuogUeYZy4FyutyIspe72D33Zqv+gqBoq5+dyccL4lMJXkxsqptANTpqKtuNt9sdkmdXhJFopzl0vgdfvspiDipDPw5ap1mpWMZL8fFScl0rTTwzCpCY5zfyLGqWhdnwtL+rA4nslbK1dUte05sb1pbDqdLuM3Q4+kkdWsrjJ9gslhHG7Ziq24cKsWxMOkmTZBkngAIJQBsaiwqU8I1tUPimH6HCYeYNi2M4vYuPUnaus4Ri2C0hgEWSdS4gBXxssB4b8IoaQwdBmTwYhyFVhUV7oU0lKWCY5iYS+lj2LSuguqSwm9JILSmH2lJkf+gTMqOQFhmqEDILgqwQexyCxDBXFbDxF58YidaILY+GWq4GKEr+-Ydo0L7GGiH6mERva6H2anqWoqAQHAmhZox2mMEaVnXjUAC0zguvZv5keYtgEoS2JqYMgGRROMQ5Hux4xSaAk+QRHAOJYLh2N6NWmG5iDGI4lq0p0GKuH29FKuOuY7pGhalWhZoIARLouPYb6WI1dKUtYLievoPWbkxk7FsVM7rJsEIHMcw38aNDgyb0HAfr6pIEbYVp+st6kRaGBUDQWx4HnqKwHdZN6uni2H6AGxiUTi7gka4khnWSfRks413PAYK1aU9oFbJ9cW2S8VX-b6+i9r6dTEY0EmovoN0KfYDietiCP5f1HAsewqMCdd1iWtYBgkxiSl2ESoOnedUNXTd8P3ZpNMgbp+mM0dkjCfazg+Rz9JWLYz5WpaJNk1iNJDsOAR+EAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QCcD2BjA1gBQIYAcxkBldAS1llWQHFcBbMAYgFdYiA6AF1SigBswAJRaDYAbQAMAXUSh8qWGS5lUAOzkgAHogCsugEwddATgAcAFgsBmAIy2T92wBoQAT0QBaAOy6Oki28zOxNdSQA2CIsDAF8Y1zQsPEISckpqOkYOfDIsGjguFmRmfH5cN04crEh82ELiqVkkEAUlFXVNHQRdb1cPBFszW2MTb3DvW2trEwtDQziEjBwCIlIKKloGMA50fBZsXMxa+u2Ad1xlMjUoADFqAGFsAFUmLTrcLm3cADNP5AAKAxhSQASiYiWWKTW6U2WV2+0OxyKZwuKmud2QjyejU0rUuHWaXSBFg4BjMuls4VMkhM4QswT6iFmJLMklsFNsFlsBic4QWIAhyVWaQ2mW28IOeQKyJ2e0lmBq0uKr3enw4Pz+gOBYMFK1S6wyW1lCKldRlEsOirNDRkuMU+I0hMQVJJ1l04Us1m81g93gMJkZCGsFhMHHpBkCZgMkhjoVC-N1UJFhrhcsRSvFaeqECRyreXA+X1+RC1MZ1SyF+phYuN8tzmZNCpzGfEtia8nt7UdoC6Lo4bo9Nm9vv9geZHFZ7PsXJ59nGCYreuhoqNFtNJ1rlub1uY+cL6uLAKBZfBi6TBthDbrGc32fr4gM7ZandU3e0zt0rvdnuHZj9AfcPQfQ4bxJB6RxKRMUJwmsBckiXZNLw4U4riYUpykqMo3AAQSgC41BxZo8S7TpEHsCIOFsNkYPMAxwnsAxekAoNAg4cxbG8ExrAiTkuQsODIWFC8a34RQSiwzDylw-DCI7NpX1IgZOWsYwOLA6IKUkAxrAMMddBU7jJCjcJGODHoIgEytlxTbYIGQXBTjQiTkGyLDpKuWTn3kgke0QKDXRsIZ2RnKJA30vxowpP9OK9SJdEshDhKNMgIEEJyMJc95kC4MVPOIhSnQQGCjCGaIhjGbw-W9QMqOGOlWUsVloPdWD+TUVAIDgTREyE6stjtby3y6TwLBqlSoLsaMZh0sIxj5eIBTPXqVyyKojgzAaHUUyZgzY7TuLpYMbEDHlQ0kL1Jm5ek4xMBLzz61NG3rTaSMKqxA2DIxvXsIJAnCD14oWnqqxWq90x3ZDUSuW4HmeF6Ct8hATF05ibEkfxPyMmCo29Wk7uWmzb3WiG1ybZ6iJfHz3yDMwzEoiYTHOxwwOCN0x24jGLCx6wcemebFng+7QeQq54aprpGfR0ZlPMYMaTZ5idJJb0wn0tS-WmfGQcJ0T2DFoa-J5-szABjTJeO1GOfU7nebxoGlu1pC7Ic-XFMZ8bOU5IJ6O0+kwrdftvocUxAn0fj7cFgmkJSwRXbegOTNpNkyXGfbwhqtl+0pc7zosf6dtuuIYiAA */
   context: {
     score: 0,
     isRulesOpened: false,
   },
   id: "rockPaperScissorGame",
-  initial: "pickGesture",
+  initial: "idle",
   on: {
     "user.toggleRules": {
       actions: assign(({ context }) => {
@@ -72,6 +73,11 @@ export const gameMachine = setup({
     },
   },
   states: {
+    idle: {
+      on: {
+        "player.startGame": { target: "pickGesture" },
+      },
+    },
     pickGesture: {
       on: {
         "player.pickedGesture": {
@@ -126,6 +132,7 @@ export const gameMachine = setup({
         },
       },
     },
+
     win: {
       entry: {
         type: "updateScore",
@@ -140,6 +147,7 @@ export const gameMachine = setup({
       },
       tags: "gameOver",
     },
+
     lose: {
       entry: {
         type: "updateScore",
@@ -154,6 +162,7 @@ export const gameMachine = setup({
       },
       tags: "gameOver",
     },
+
     draw: {
       on: {
         "player.playAgain": {
