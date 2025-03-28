@@ -3,7 +3,7 @@ import { Button } from "../ui";
 import { FaGear } from "react-icons/fa6";
 import { GameMachineContext } from "../../context/gameMachineContext";
 import { RadioGroup, Radio, Label } from "react-aria-components";
-import { Difficulty } from "../../app.model";
+import { Difficulty, GameMode } from "../../app.model";
 
 import styles from "./GameSettings.module.scss";
 
@@ -12,7 +12,7 @@ export const GameSettings = () => {
   const state = GameMachineContext.useSelector((state) => state);
 
   const isSettingsOpened = state.context.isSettingsOpened;
-  const { difficulty } = state.context.settings;
+  const { difficulty, gameMode } = state.context.settings;
 
   const handleOnOpenChange = () => {
     send({ type: "player.toggleSettings" });
@@ -22,8 +22,13 @@ export const GameSettings = () => {
     state.context.settings.difficulty = difficulty as Difficulty;
   };
 
+  const handleGameModeChange = (gameMode: string) => {
+    state.context.settings.gameMode = gameMode as GameMode;
+  };
+
   return (
     <DialogTrigger>
+      {isSettingsOpened && <div className={styles.overlay}></div>}
       <Button
         onPress={handleOnOpenChange}
         variant="icon"
@@ -55,6 +60,20 @@ export const GameSettings = () => {
             </Radio>
             <Radio className={styles.difficultyRadio} value="unfair">
               Completely Unfair
+            </Radio>
+          </RadioGroup>
+
+          <RadioGroup
+            className={styles.gameMode}
+            defaultValue={gameMode}
+            onChange={handleGameModeChange}
+          >
+            <Label className={styles.label}>Game Mode</Label>
+            <Radio className={styles.gameModeRadio} value="default">
+              Default
+            </Radio>
+            <Radio className={styles.gameModeRadio} value="spock">
+              Spicy
             </Radio>
           </RadioGroup>
         </Dialog>

@@ -1,38 +1,46 @@
 import { Button } from "react-aria-components";
-import bgTriangle from "../../assets/bg-triangle.svg";
+import clsx from "clsx";
 
-import styles from "./PickGesture.module.scss";
+import bgTriangle from "../../assets/bg-triangle.svg";
+import bgPentagon from "../../assets/bg-pentagon.svg";
 import { Gesture } from "../../app.model";
 import { GameMachineContext } from "../../context/gameMachineContext";
 
+import styles from "./PickGesture.module.scss";
+
+const GESTURES = {
+  default: ["PAPER", "ROCK", "SCISSORS"],
+  spicy: ["PAPER", "ROCK", "SCISSORS", "LIZARD", "SPOCK"],
+};
+
 export const PickGesture = () => {
   const { send } = GameMachineContext.useActorRef();
+  const { gameMode } = GameMachineContext.useSelector(
+    (state) => state.context.settings
+  );
 
   const handlePickGesture = (gesture: Gesture) => {
     send({ type: "player.pickedGesture", gesture });
   };
 
+  const isSpicyMode = gameMode !== "default";
+  const gestures = isSpicyMode ? GESTURES.spicy : GESTURES.default;
+  const background = isSpicyMode ? bgPentagon : bgTriangle;
+
   return (
-    <div className={styles.wrapper}>
-      <img src={bgTriangle} alt="" />
-      <Button
-        onPress={() => handlePickGesture("PAPER")}
-        className={`${styles.button} ${styles.paper}`}
-      >
-        <span className="sr-only">Pick paper</span>
-      </Button>
-      <Button
-        onPress={() => handlePickGesture("ROCK")}
-        className={`${styles.button} ${styles.rock}`}
-      >
-        <span className="sr-only">Pick rock</span>
-      </Button>
-      <Button
-        onPress={() => handlePickGesture("SCISSORS")}
-        className={`${styles.button} ${styles.scissors}`}
-      >
-        <span className="sr-only">Pick scissors</span>
-      </Button>
+    <div className={clsx(styles.wrapper, { [styles.spicy]: isSpicyMode })}>
+      <img src={background} alt="" />
+      {gestures.map((gesture) => (
+        <Button
+          key={gesture}
+          onPress={() => handlePickGesture(gesture as Gesture)}
+          className={clsx(styles.button, styles[gesture.toLowerCase()], {
+            [styles.spicy]: isSpicyMode,
+          })}
+        >
+          <span className="sr-only">Pick {gesture.toLowerCase()}</span>
+        </Button>
+      ))}
     </div>
   );
 };

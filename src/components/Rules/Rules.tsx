@@ -1,10 +1,11 @@
 import { Dialog, DialogTrigger, Heading, Modal } from "react-aria-components";
+import { FaXmark } from "react-icons/fa6";
 
 import rules from "../../assets/image-rules.svg";
-
+import spockRules from "../../assets/image-rules-bonus.svg";
 import { GameMachineContext } from "../../context/gameMachineContext";
+
 import { Button } from "../ui";
-import { FaXmark } from "react-icons/fa6";
 
 import styles from "./Rules.module.scss";
 
@@ -12,7 +13,10 @@ export const Rules = () => {
   const { send } = GameMachineContext.useActorRef();
   const state = GameMachineContext.useSelector((state) => state);
 
-  const isRulesOpen = state.context.isRulesOpened;
+  const {
+    isRulesOpened,
+    settings: { gameMode },
+  } = state.context;
 
   const handleOnOpenChange = () => {
     send({ type: "player.toggleRules" });
@@ -30,7 +34,7 @@ export const Rules = () => {
       <Modal
         className={styles.modal}
         isDismissable
-        isOpen={isRulesOpen}
+        isOpen={isRulesOpened}
         onOpenChange={handleOnOpenChange}
       >
         <Dialog className={styles.dialog}>
@@ -40,7 +44,7 @@ export const Rules = () => {
           <img
             width={305}
             height={271}
-            src={rules}
+            src={gameMode === "default" ? rules : spockRules}
             alt=""
             className={styles.image}
           />

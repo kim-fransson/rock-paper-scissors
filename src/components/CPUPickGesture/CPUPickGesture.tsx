@@ -1,6 +1,6 @@
 // import { Button } from "react-aria-components";
 import { GameMachineContext } from "../../context/gameMachineContext";
-import { Loading, Paper, Rock, Scissors } from "../Gesture";
+import { Loading, Paper, Rock, Scissors, Spock, Lizard } from "../Gesture";
 
 import styles from "./CPUPickGesture.module.scss";
 
@@ -8,6 +8,8 @@ const gestureMap = {
   ROCK: <Rock />,
   PAPER: <Paper />,
   SCISSORS: <Scissors />,
+  SPOCK: <Spock />,
+  LIZARD: <Lizard />,
 };
 
 export const CPUPickGesture = () => {

@@ -48,6 +48,16 @@
       shadow: var(--scissors-shadow),
       icon: "../../assets/icon-scissors.svg",
     ),
+    lizard: (
+      gradient: var(--lizard-gradient),
+      shadow: var(--lizard-shadow),
+      icon: "../../assets/icon-lizard.svg",
+    ),
+    spock: (
+      gradient: var(--spock-gradient),
+      shadow: var(--spock-shadow),
+      icon: "../../assets/icon-spock.svg",
+    ),
   );
 
   @each $type, $data in $types {

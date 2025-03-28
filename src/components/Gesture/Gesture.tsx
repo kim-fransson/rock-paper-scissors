@@ -10,6 +10,8 @@ const Gesture: React.FC<GestureProps> = ({ gesture }) => {
     PAPER: styles.paper,
     ROCK: styles.rock,
     SCISSORS: styles.scissors,
+    LIZARD: styles.lizard,
+    SPOCK: styles.spock,
   };
 
   return <div className={`${styles.gesture} ${gestureStyles[gesture]}`}></div>;
@@ -18,6 +20,8 @@ const Gesture: React.FC<GestureProps> = ({ gesture }) => {
 export const Paper = () => <Gesture gesture="PAPER" />;
 export const Rock = () => <Gesture gesture="ROCK" />;
 export const Scissors = () => <Gesture gesture="SCISSORS" />;
+export const Lizard = () => <Gesture gesture="LIZARD" />;
+export const Spock = () => <Gesture gesture="SPOCK" />;
 export const Loading = () => (
   <div className={`${styles.gesture} ${styles.loading}`}></div>
 );

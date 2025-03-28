@@ -29,17 +29,21 @@ export const gameMachine = setup({
           break;
         }
         case "tactician": {
+          const numberOfGestures =
+            context.settings.gameMode === "default" ? 3 : 5;
+
           if (!context.cpu) {
-            const index = Math.floor(Math.random() * gestures.length);
+            const index = Math.floor(Math.random() * numberOfGestures);
             gesture = gestures[index];
             // what was cpu previous game, and did cpu won
           } else if (context.winner === context.cpu) {
-            const index = (gestures.indexOf(context.cpu) + 1) % gestures.length;
+            const index =
+              (gestures.indexOf(context.cpu) + 1) % numberOfGestures;
             gesture = gestures[index];
           } else {
             const index =
-              (gestures.indexOf(context.cpu) - 1 + gestures.length) %
-              gestures.length;
+              (gestures.indexOf(context.cpu) - 1 + numberOfGestures) %
+              numberOfGestures;
             gesture = gestures[index];
           }
           break;
@@ -95,6 +99,7 @@ export const gameMachine = setup({
     isSettingsOpened: false,
     settings: {
       difficulty: "random",
+      gameMode: "default",
     },
   },
   id: "rockPaperScissorGame",

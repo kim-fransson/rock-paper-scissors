@@ -5,6 +5,10 @@
   align-self: center;
   grid-column: 1 / span 2;
   grid-row: 1 / span 2;
+
+  &.spicy {
+    max-width: 220px;
+  }
 }
 
 .button {
@@ -14,6 +18,13 @@
   border-radius: 100%;
   color: var(--dark-text);
   cursor: pointer;
+
+  &.spicy {
+    min-width: 115px;
+  }
+  &.spicy::before {
+    width: 85px;
+  }
 
   &::before {
     display: grid;
@@ -35,6 +46,11 @@
     top: 0;
     left: 0;
     translate: -50% -50%;
+    &.spicy {
+      top: 25%;
+      left: 100%;
+      translate: -50% -25%;
+    }
   }
   &.paper::before {
     content: url("../../assets/icon-paper.svg");
@@ -46,6 +62,12 @@
     bottom: 0;
     left: 50%;
     translate: -50% 50%;
+
+    &.spicy {
+      bottom: 0;
+      left: 70%;
+      translate: -30% 50%;
+    }
   }
   &.rock::before {
     content: url("../../assets/icon-rock.svg");
@@ -57,8 +79,37 @@
     top: 0;
     right: 0;
     translate: 50% -50%;
+
+    &.spicy {
+      top: 0;
+      right: 50%;
+      translate: 50% -50%;
+    }
   }
   &.scissors::before {
     content: url("../../assets/icon-scissors.svg");
+  }
+
+  &.lizard {
+    background: var(--lizard-gradient);
+    box-shadow: 0 5px 0 var(--lizard-shadow), 0px 3px 3px var(--button-shadow);
+
+    bottom: 0;
+    left: 30%;
+    translate: -70% 50%;
+  }
+  &.lizard::before {
+    content: url("../../assets/icon-lizard.svg");
+  }
+
+  &.spock {
+    background: var(--spock-gradient);
+    box-shadow: 0 5px 0 var(--spock-shadow), 0px 3px 3px var(--button-shadow);
+    top: 25%;
+    left: 0;
+    translate: -50% -25%;
+  }
+  &.spock::before {
+    content: url("../../assets/icon-spock.svg");
   }
 }
