@@ -17,7 +17,7 @@ export const beatMapper: Record<Gesture, Gesture[]> = {
 };
 
 export type Difficulty = "random" | "tactician" | "unfair";
-export type GameMode = "default" | "spock";
+export type GameMode = "default" | "spicy";
 
 export type Settings = {
   difficulty: Difficulty;

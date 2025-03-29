@@ -8,7 +8,7 @@ import {
 import { FaXmark } from "react-icons/fa6";
 
 import rules from "../../assets/image-rules.svg";
-import spockRules from "../../assets/image-rules-bonus.svg";
+import spicyRules from "../../assets/image-rules-bonus.svg";
 import { GameMachineContext } from "../../context/gameMachineContext";
 
 import { Button } from "../ui";
@@ -74,7 +74,7 @@ export const Rules = () => {
                 <img
                   width={305}
                   height={271}
-                  src={gameMode === "default" ? rules : spockRules}
+                  src={gameMode === "default" ? rules : spicyRules}
                   alt=""
                   className={styles.image}
                 />

@@ -23,16 +23,15 @@ export const gameMachine = setup({
   actions: {
     setCPU: function ({ context }) {
       let gesture: Gesture;
+      const numberOfGestures = context.settings.gameMode === "default" ? 3 : 5;
+
       switch (context.settings.difficulty) {
         case "random": {
-          const index = Math.floor(Math.random() * gestures.length);
+          const index = Math.floor(Math.random() * numberOfGestures);
           gesture = gestures[index];
           break;
         }
         case "tactician": {
-          const numberOfGestures =
-            context.settings.gameMode === "default" ? 3 : 5;
-
           if (!context.cpu) {
             const index = Math.floor(Math.random() * numberOfGestures);
             gesture = gestures[index];
