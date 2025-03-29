@@ -17,6 +17,7 @@ export const gameMachine = setup({
       | { type: "player.toggleSettings" }
       | { type: "player.startGame" }
       | { type: "player.pickedGesture"; gesture: Gesture }
+      | { type: "player.updateSettings"; settings: Settings }
       | { type: "player.playAgain" },
   },
   actions: {
@@ -100,6 +101,7 @@ export const gameMachine = setup({
     settings: {
       difficulty: "random",
       gameMode: "default",
+      volume: 0,
     },
   },
   id: "rockPaperScissorGame",
@@ -117,6 +119,14 @@ export const gameMachine = setup({
         return {
           isSettingsOpened: !context.isSettingsOpened,
         };
+      }),
+    },
+    "player.updateSettings": {
+      actions: assign({
+        settings: ({ event }) => {
+          assertEvent(event, "player.updateSettings");
+          return event.settings;
+        },
       }),
     },
   },

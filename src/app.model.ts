@@ -22,4 +22,5 @@ export type GameMode = "default" | "spock";
 export type Settings = {
   difficulty: Difficulty;
   gameMode: GameMode;
+  volume: number;
 };

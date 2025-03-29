@@ -1,4 +1,11 @@
-import { Dialog, DialogTrigger, Popover, Heading } from "react-aria-components";
+import {
+  Dialog,
+  DialogTrigger,
+  Popover,
+  Heading,
+  Switch,
+  Separator,
+} from "react-aria-components";
 import useSound from "use-sound";
 import { FaGear } from "react-icons/fa6";
 
@@ -8,21 +15,24 @@ import { Difficulty, GameMode } from "../../app.model";
 import bubble from "../../assets/bubble.wav";
 import pop1 from "../../assets/pop-1.wav";
 import pop3 from "../../assets/pop-3.wav";
+import switchOn from "../../assets/switchOn.mp3";
+import switchOff from "../../assets/switchOff.mp3";
 
 import { Button } from "../ui";
 
 import styles from "./GameSettings.module.scss";
 
 export const GameSettings = () => {
-  const [play] = useSound(bubble, { volume: 0.5 });
-  const [playOpen] = useSound(pop1, { volume: 0.5 });
-  const [playClose] = useSound(pop3, { volume: 0.5 });
-
   const { send } = GameMachineContext.useActorRef();
   const state = GameMachineContext.useSelector((state) => state);
-
   const isSettingsOpened = state.context.isSettingsOpened;
-  const { difficulty, gameMode } = state.context.settings;
+  const { difficulty, gameMode, volume } = state.context.settings;
+
+  const [playBubble] = useSound(bubble, { volume: 0.5 * volume });
+  const [playOpen] = useSound(pop1, { volume: 0.5 * volume });
+  const [playClose] = useSound(pop3, { volume: 0.5 * volume });
+  const [playSwitchOn] = useSound(switchOn, { volume: 0.5 * volume });
+  const [playSwitchOff] = useSound(switchOff, { volume: 0.5 * volume });
 
   const handleOnOpenChange = () => {
     if (isSettingsOpened) {
@@ -34,13 +44,40 @@ export const GameSettings = () => {
   };
 
   const handleDifficultyChange = (difficulty: string) => {
-    play();
-    state.context.settings.difficulty = difficulty as Difficulty;
+    playBubble();
+    send({
+      type: "player.updateSettings",
+      settings: {
+        ...state.context.settings,
+        difficulty: difficulty as Difficulty,
+      },
+    });
   };
 
   const handleGameModeChange = (gameMode: string) => {
-    play();
-    state.context.settings.gameMode = gameMode as GameMode;
+    playBubble();
+    send({
+      type: "player.updateSettings",
+      settings: { ...state.context.settings, gameMode: gameMode as GameMode },
+    });
+  };
+
+  const handleVolumeToggle = (volumeOn: boolean) => {
+    if (volumeOn) {
+      playSwitchOn();
+      send({
+        type: "player.updateSettings",
+        settings: { ...state.context.settings, volume: 1 },
+      });
+    } else {
+      playSwitchOff();
+      setTimeout(() => {
+        send({
+          type: "player.updateSettings",
+          settings: { ...state.context.settings, volume: 0 },
+        });
+      }, 200); // Delay ensures the sound plays before volume is cut off
+    }
   };
 
   return (
@@ -65,7 +102,7 @@ export const GameSettings = () => {
           </Heading>
           <RadioGroup
             className={styles.difficulty}
-            defaultValue={difficulty}
+            value={difficulty}
             onChange={handleDifficultyChange}
           >
             <Label className={styles.label}>Difficulty</Label>
@@ -82,7 +119,7 @@ export const GameSettings = () => {
 
           <RadioGroup
             className={styles.gameMode}
-            defaultValue={gameMode}
+            value={gameMode}
             onChange={handleGameModeChange}
           >
             <Label className={styles.label}>Game Mode</Label>
@@ -93,6 +130,17 @@ export const GameSettings = () => {
               Spicy
             </Radio>
           </RadioGroup>
+
+          <Separator className={styles.separator} />
+
+          <Switch
+            isSelected={volume > 0 ? true : false}
+            onChange={handleVolumeToggle}
+            className={styles.soundSwitch}
+          >
+            <div className={styles.indicator} />
+            Activate Sound
+          </Switch>
         </Dialog>
       </Popover>
     </DialogTrigger>
