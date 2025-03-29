@@ -21,8 +21,16 @@ import switchOff from "../../assets/switchOff.mp3";
 import { Button } from "../ui";
 
 import styles from "./GameSettings.module.scss";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+
+type AnimationState = "hidden" | "visible";
+
+const MotionPopover = motion.create(Popover);
 
 export const GameSettings = () => {
+  const [animation, setAnimation] = useState<AnimationState>("hidden");
+
   const { send } = GameMachineContext.useActorRef();
   const state = GameMachineContext.useSelector((state) => state);
   const isSettingsOpened = state.context.isSettingsOpened;
@@ -36,8 +44,10 @@ export const GameSettings = () => {
 
   const handleOnOpenChange = () => {
     if (isSettingsOpened) {
+      setAnimation("hidden");
       playClose();
     } else {
+      setAnimation("visible");
       playOpen();
     }
     send({ type: "player.toggleSettings" });
@@ -82,7 +92,6 @@ export const GameSettings = () => {
 
   return (
     <DialogTrigger>
-      {isSettingsOpened && <div className={styles.overlay}></div>}
       <Button
         onPress={handleOnOpenChange}
         variant="icon"
@@ -91,58 +100,100 @@ export const GameSettings = () => {
         <FaGear size={30} />
         <span className="sr-only">toggle game settings</span>
       </Button>
-      <Popover
-        isOpen={isSettingsOpened}
-        onOpenChange={handleOnOpenChange}
-        className={styles.popover}
-      >
-        <Dialog className={styles.dialog}>
-          <Heading slot="title" className={styles.heading}>
-            Settings
-          </Heading>
-          <RadioGroup
-            className={styles.difficulty}
-            value={difficulty}
-            onChange={handleDifficultyChange}
-          >
-            <Label className={styles.label}>Difficulty</Label>
-            <Radio className={styles.difficultyRadio} value="random">
-              Unpredictable
-            </Radio>
-            <Radio className={styles.difficultyRadio} value="tactician">
-              Tactician
-            </Radio>
-            <Radio className={styles.difficultyRadio} value="unfair">
-              Completely Unfair
-            </Radio>
-          </RadioGroup>
 
-          <RadioGroup
-            className={styles.gameMode}
-            value={gameMode}
-            onChange={handleGameModeChange}
-          >
-            <Label className={styles.label}>Game Mode</Label>
-            <Radio className={styles.gameModeRadio} value="default">
-              Default
-            </Radio>
-            <Radio className={styles.gameModeRadio} value="spock">
-              Spicy
-            </Radio>
-          </RadioGroup>
+      <AnimatePresence>
+        {isSettingsOpened && (
+          <>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                },
+                exit: {
+                  opacity: [0],
+                },
+              }}
+              initial="hidden"
+              exit="exit"
+              animate={animation}
+              className={styles.overlay}
+            ></motion.div>
+            <MotionPopover
+              isOpen={isSettingsOpened}
+              onOpenChange={handleOnOpenChange}
+              className={styles.popover}
+              variants={{
+                hidden: { opacity: 0, scale: 1 },
+                visible: {
+                  opacity: 1,
+                  scale: [1, 1.1, 1], // Bounce effect
+                  transition: {
+                    duration: 0.3,
+                  },
+                },
+                exit: {
+                  opacity: [1, 1, 0],
+                  scale: [1, 0.9, 0], // Shrink and disappear
+                  transition: {
+                    duration: 0.3,
+                  },
+                },
+              }}
+              initial="hidden"
+              exit="exit"
+              animate={animation}
+            >
+              <Dialog className={styles.dialog}>
+                <Heading slot="title" className={styles.heading}>
+                  Settings
+                </Heading>
+                <RadioGroup
+                  className={styles.difficulty}
+                  value={difficulty}
+                  onChange={handleDifficultyChange}
+                >
+                  <Label className={styles.label}>Difficulty</Label>
+                  <Radio className={styles.difficultyRadio} value="random">
+                    Unpredictable
+                  </Radio>
+                  <Radio className={styles.difficultyRadio} value="tactician">
+                    Tactician
+                  </Radio>
+                  <Radio className={styles.difficultyRadio} value="unfair">
+                    Completely Unfair
+                  </Radio>
+                </RadioGroup>
 
-          <Separator className={styles.separator} />
+                <RadioGroup
+                  className={styles.gameMode}
+                  value={gameMode}
+                  onChange={handleGameModeChange}
+                >
+                  <Label className={styles.label}>Game Mode</Label>
+                  <Radio className={styles.gameModeRadio} value="default">
+                    Default
+                  </Radio>
+                  <Radio className={styles.gameModeRadio} value="spock">
+                    Spicy
+                  </Radio>
+                </RadioGroup>
 
-          <Switch
-            isSelected={volume > 0 ? true : false}
-            onChange={handleVolumeToggle}
-            className={styles.soundSwitch}
-          >
-            <div className={styles.indicator} />
-            Activate Sound
-          </Switch>
-        </Dialog>
-      </Popover>
+                <Separator className={styles.separator} />
+
+                <Switch
+                  isSelected={volume > 0 ? true : false}
+                  onChange={handleVolumeToggle}
+                  className={styles.soundSwitch}
+                >
+                  <div className={styles.indicator} />
+                  Activate Sound
+                </Switch>
+              </Dialog>
+            </MotionPopover>
+          </>
+        )}
+      </AnimatePresence>
     </DialogTrigger>
   );
 };

@@ -18,7 +18,7 @@
   color: var(--dark-text);
   padding: 20px;
   border-radius: 8px;
-  min-width: 250px;
+  min-width: 275px;
 }
 
 .dialog {
@@ -41,7 +41,7 @@
 .difficulty,
 .gameMode {
   display: grid;
-  gap: 12px;
+  gap: 16px;
 }
 
 .gameMode {
@@ -61,25 +61,24 @@
 .gameModeRadio {
   display: flex;
   align-items: center;
-  gap: 0.571rem;
+  gap: 8px;
   cursor: pointer;
 
   &:before {
     content: "";
     display: block;
-    border: 0.143rem solid var(--dark-text);
+    border: 2px solid var(--dark-text);
     transition: all 200ms;
     border-radius: 100%;
+    aspect-ratio: 1 / 1;
   }
 
   &.difficultyRadio:before {
-    width: 20px;
-    height: 20px;
+    width: 24px;
   }
 
   &.gameModeRadio:before {
-    width: 28px;
-    height: 28px;
+    width: 32px;
   }
 
   // &[data-pressed]:before {
@@ -89,7 +88,7 @@
   &[data-selected] {
     &.difficultyRadio:before {
       // border-color: var(--highlight-background);
-      border-width: 6px;
+      border-width: 7px;
     }
     &.gameModeRadio:before {
       // border-color: var(--highlight-background);
