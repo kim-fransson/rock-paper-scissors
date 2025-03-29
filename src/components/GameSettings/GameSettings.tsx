@@ -120,7 +120,7 @@ export const GameSettings = () => {
               className={styles.overlay}
             ></motion.div>
             <MotionPopover
-              isOpen={isSettingsOpened}
+              isOpen
               onOpenChange={handleOnOpenChange}
               className={styles.popover}
               variants={{
