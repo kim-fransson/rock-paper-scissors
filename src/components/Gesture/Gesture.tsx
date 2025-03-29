@@ -1,4 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { motion } from "motion/react";
+import useSound from "use-sound";
+import { useEffect } from "react";
+
 import { Gesture as GestureType } from "../../app.model";
+import pop from "../../assets/pop-1.wav";
+import { GameMachineContext } from "../../context/gameMachineContext";
+
 import styles from "./Gesture.module.scss";
 
 interface GestureProps {
@@ -6,6 +14,11 @@ interface GestureProps {
 }
 
 const Gesture: React.FC<GestureProps> = ({ gesture }) => {
+  const volume = GameMachineContext.useSelector(
+    (state) => state.context.settings.volume
+  );
+  const [playPop] = useSound(pop, { volume: 0.5 * volume });
+
   const gestureStyles = {
     PAPER: styles.paper,
     ROCK: styles.rock,
@@ -14,7 +27,17 @@ const Gesture: React.FC<GestureProps> = ({ gesture }) => {
     SPOCK: styles.spock,
   };
 
-  return <div className={`${styles.gesture} ${gestureStyles[gesture]}`}></div>;
+  useEffect(() => {
+    playPop();
+  }, [gesture, playPop]);
+
+  return (
+    <motion.div
+      animate={{ scale: 1 }}
+      initial={{ scale: 0 }}
+      className={`${styles.gesture} ${gestureStyles[gesture]}`}
+    ></motion.div>
+  );
 };
 
 export const Paper = () => <Gesture gesture="PAPER" />;
