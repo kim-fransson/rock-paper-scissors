@@ -1,3 +1,14 @@
+import { EventFromLogic, SnapshotFrom } from "xstate";
+import { gameMachine } from "./gameMachine";
+
+export type AppState = SnapshotFrom<typeof gameMachine>;
+export type AppEvents = EventFromLogic<typeof gameMachine>;
+
+export type AppContextType = {
+  state: AppState;
+  send: (event: AppEvents) => void;
+};
+
 export const gestures = [
   "ROCK",
   "PAPER",

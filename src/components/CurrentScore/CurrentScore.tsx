@@ -1,10 +1,9 @@
-import { GameMachineContext } from "../../context/gameMachineContext";
+import { useApp } from "../../hooks";
 import styles from "./CurrentScore.module.scss";
 
 export const CurrentScore = () => {
-  const currentScore = GameMachineContext.useSelector(
-    (state) => state.context.score
-  );
+  const { state } = useApp();
+  const currentScore = state.context.score;
 
   return (
     <span className={styles.currentScore}>

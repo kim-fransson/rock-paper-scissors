@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 
-import { GameMachineContext } from "../../context/gameMachineContext";
 import winSound from "../../assets/win.mp3";
 import loseSound from "../../assets/lose.wav";
 import drawSound from "../../assets/draw.wav";
@@ -12,6 +11,7 @@ import drawSound from "../../assets/draw.wav";
 import { Button } from "../ui";
 
 import styles from "./PlayAgain.module.scss";
+import { useApp } from "../../hooks";
 
 const textMap: Record<string, string> = {
   win: "you win",
@@ -27,8 +27,7 @@ const soundMap: Record<string, string> = {
 
 export const PlayAgain = () => {
   const { width, height } = useWindowSize();
-  const state = GameMachineContext.useSelector((state) => state);
-  const { send } = GameMachineContext.useActorRef();
+  const { state, send } = useApp();
 
   const [playGameOver, { stop }] = useSound(soundMap[state.value as string], {
     volume: 0.5 * state.context.settings.volume,

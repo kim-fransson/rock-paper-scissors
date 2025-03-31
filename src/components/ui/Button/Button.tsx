@@ -9,7 +9,7 @@ import clsx from "clsx";
 import bubble from "../../../assets/bubble.wav";
 
 import styles from "./Button.module.scss";
-import { GameMachineContext } from "../../../context/gameMachineContext";
+import { useApp } from "../../../hooks";
 
 interface ButtonProps extends AriaButtonProps {
   variant?: "primary" | "secondary" | "icon";
@@ -23,10 +23,10 @@ export const Button = ({
   onPress,
   ...props
 }: ButtonProps) => {
-  const volume = GameMachineContext.useSelector(
-    (state) => state.context.settings.volume
-  );
-  const [playBubble] = useSound(bubble, { volume: 0.5 * volume });
+  const { state } = useApp();
+  const [playBubble] = useSound(bubble, {
+    volume: 0.5 * state.context.settings.volume,
+  });
 
   const handlePressWithSound = (e: PressEvent) => {
     playBubble();

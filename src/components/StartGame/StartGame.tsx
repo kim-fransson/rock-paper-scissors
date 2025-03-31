@@ -1,10 +1,10 @@
-import { GameMachineContext } from "../../context/gameMachineContext";
+import { useApp } from "../../hooks";
 import { Button } from "../ui";
 
 import styles from "./StartGame.module.scss";
 
 export const StartGame = () => {
-  const { send } = GameMachineContext.useActorRef();
+  const { send } = useApp();
 
   const handleStartGame = () => {
     send({ type: "player.startGame" });

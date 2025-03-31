@@ -1,4 +1,4 @@
-import { GameMachineContext } from "../../context/gameMachineContext";
+import { useApp } from "../../hooks";
 import { CPUPickGesture } from "../CPUPickGesture";
 import { PickGesture } from "../PickSymbol";
 import { PlayAgain } from "../PlayAgain";
@@ -7,8 +7,7 @@ import { StartGame } from "../StartGame";
 import styles from "./GamePanel.module.scss";
 
 export const GamePanel = () => {
-  const state = GameMachineContext.useSelector((state) => state);
-
+  const { state } = useApp();
   const renderContent = () => {
     switch (true) {
       case state.matches("idle"):

@@ -1,5 +1,4 @@
-// import { Button } from "react-aria-components";
-import { GameMachineContext } from "../../context/gameMachineContext";
+import { useApp } from "../../hooks";
 import { Loading, Paper, Rock, Scissors, Spock, Lizard } from "../Gesture";
 
 import styles from "./CPUPickGesture.module.scss";
@@ -13,8 +12,7 @@ const gestureMap = {
 };
 
 export const CPUPickGesture = () => {
-  const state = GameMachineContext.useSelector((state) => state);
-
+  const { state } = useApp();
   return (
     <div className={styles.playerCpuGestureWrapper}>
       <div className={`${styles.textGestureWrapper} ${styles.player}`}>

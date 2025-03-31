@@ -5,19 +5,19 @@ import { useEffect } from "react";
 
 import { Gesture as GestureType } from "../../app.model";
 import pop from "../../assets/pop-1.wav";
-import { GameMachineContext } from "../../context/gameMachineContext";
 
 import styles from "./Gesture.module.scss";
+import { useApp } from "../../hooks";
 
 interface GestureProps {
   gesture: GestureType;
 }
 
 const Gesture: React.FC<GestureProps> = ({ gesture }) => {
-  const volume = GameMachineContext.useSelector(
-    (state) => state.context.settings.volume
-  );
-  const [playPop] = useSound(pop, { volume: 0.5 * volume });
+  const { state } = useApp();
+  const [playPop] = useSound(pop, {
+    volume: 0.5 * state.context.settings.volume,
+  });
 
   const gestureStyles = {
     PAPER: styles.paper,

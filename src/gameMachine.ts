@@ -8,13 +8,9 @@ export const gameMachine = setup({
       winner?: Gesture;
       score: number;
       cpu?: Gesture;
-      isRulesOpened: boolean;
-      isSettingsOpened: boolean;
       settings: Settings;
     },
     events: {} as
-      | { type: "player.toggleRules" }
-      | { type: "player.toggleSettings" }
       | { type: "player.startGame" }
       | { type: "player.pickedGesture"; gesture: Gesture }
       | { type: "player.updateSettings"; settings: Settings }
@@ -95,8 +91,6 @@ export const gameMachine = setup({
   /** @xstate-layout N4IgpgJg5mDOIC5QCcD2BjA1gBQIYAcxkBldAS1llWQHFcBbMAYnwBtcBPIgOgBdUoUVmABKAV2GwA2gAYAuolD5UsMrzKoAdopAAPRDIA0IDgYC+Z42ix5CJcpWp1GLdl2R8BQsMTC91mlDS8jrKqupaOvoIACwAzACM3ACcAKwJMckAHFmZcWmpccamCAC0WdxZcXEyyckAbJkJDakATBZWGDgERKQUVLQMYNxkEMKunDywvLjIvM5gsgpIIGFqGtor0QDscRUyCan1qTI1rXVFJogxzZU3WQmt+Qn1yS9xHSDW3XZ9joOMbj4MhYGhwXhiZDMNiTDzArCQMHTSGLEIrNYRTagaKpbbFRCtbb1SrbVo3R7HI4PD6WL5dWy9BwDBbcdD4MTYEGYJEQqHcADuuHWgQAYtQAMLYACqTF001wvGGuAAZorkAAKVonGQASiY3wZ9n6TiGrPZnNB4JRAqFASgYuQkqlS1CKnWkS2BNSMW4rSy6WOhyyMmp9XxCDaPtxx1OqWSMTae0+Bp6Rv+LLZHK5POtmYtmERVqhsvliu4KrVmu1epTvyZJsBeezReGTYREBzUJd6LdmKiiHqjW4cSO23jr3ybTxVwjp19MXqRLijVaCVyy+T9NTf2Zprb3JbZqz7c7zDlMzLFaIVZkuv1W7rxoBrfNzeRfP3hffiwSyyUvY2fsEEHH0R0XcdkknQlw3qENuCOXE2hkeoEm2XZUk3Gxt3rZ8j3zU88K5L9eTPUslVVa8tVvGsH0ZJ8M1fS1v0Ik8WykVo-1WACPWxAdvWHUcIKg6cSleGRuBibZbxOZIZBOLJWnaWlazo9NTX5MhNAmdwgTcABBKAhU0bt-3CQDPQQBIrOJBIDlgl5ClaeonPDE4km2BcrMSGInkyU5MJ+VTd0BVgVGhNweBhDgDKMkyuLMni9EQKzCngl4GjiTI-Tk1oYJkbZuGQ9IDiOZo9hpTosMfNTAQgZBcH5bTIv0wzNLijFzN4hA6lA+JtgUw5GgyBIYJyFJXhiW9JsjV4LFpTRUAgOAdBUtNgrAV0EqxJKyhicM12SeDMkk7Yg3y-IAsNHcG2GUZhE291tuiY5QMEhdILSaCZx88Tb2SfqrNaWoZGmy7sPo014QPb8Hr7CyEkyn1kieJzZJQ6p41ckGJIyZD-SBx4ZCUyrArWm6WOhkjYc6naYj277Hng5DFPywkajiDyweq9aKYIwVhXtCVpWpxLomR8NMkOhS3nyhMgayY4KrpKqgvJ-cCM-DsWxFp7ED2CpUIO1n0n6sNvrqSpzlsjykIVwoudV3CNO2jrRcQGWUlOvZ6geXFbxE65+oki5KWR-IFIw5TaLJ3DQtgDaey2oD4wqb2PLtyMR1cqpKjXEc4zK5dieV0nrtwuqGp15O5zeSbZLJKS5LN0SskOhHdleBG6bjGkLCAA */
   context: {
     score: 0,
-    isRulesOpened: false,
-    isSettingsOpened: false,
     settings: {
       difficulty: "random",
       gameMode: "default",
@@ -106,20 +100,6 @@ export const gameMachine = setup({
   id: "rockPaperScissorGame",
   initial: "idle",
   on: {
-    "player.toggleRules": {
-      actions: assign(({ context }) => {
-        return {
-          isRulesOpened: !context.isRulesOpened,
-        };
-      }),
-    },
-    "player.toggleSettings": {
-      actions: assign(({ context }) => {
-        return {
-          isSettingsOpened: !context.isSettingsOpened,
-        };
-      }),
-    },
     "player.updateSettings": {
       actions: assign({
         settings: ({ event }) => {

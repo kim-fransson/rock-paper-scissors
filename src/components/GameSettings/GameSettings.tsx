@@ -9,7 +9,6 @@ import {
 import useSound from "use-sound";
 import { FaGear } from "react-icons/fa6";
 
-import { GameMachineContext } from "../../context/gameMachineContext";
 import { RadioGroup, Radio, Label } from "react-aria-components";
 import { Difficulty, GameMode } from "../../app.model";
 import bubble from "../../assets/bubble.wav";
@@ -23,17 +22,18 @@ import { Button } from "../ui";
 import styles from "./GameSettings.module.scss";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { useApp } from "../../hooks";
 
 type AnimationState = "hidden" | "visible";
 
 const MotionPopover = motion.create(Popover);
 
 export const GameSettings = () => {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [animation, setAnimation] = useState<AnimationState>("hidden");
 
-  const { send } = GameMachineContext.useActorRef();
-  const state = GameMachineContext.useSelector((state) => state);
-  const isSettingsOpened = state.context.isSettingsOpened;
+  const { state, send } = useApp();
+
   const { difficulty, gameMode, volume } = state.context.settings;
 
   const [playBubble] = useSound(bubble, { volume: 0.5 * volume });
@@ -43,14 +43,14 @@ export const GameSettings = () => {
   const [playSwitchOff] = useSound(switchOff, { volume: 0.5 * volume });
 
   const handleOnOpenChange = () => {
-    if (isSettingsOpened) {
+    if (isSettingsOpen) {
       setAnimation("hidden");
       playClose();
     } else {
       setAnimation("visible");
       playOpen();
     }
-    send({ type: "player.toggleSettings" });
+    setIsSettingsOpen((prev) => !prev);
   };
 
   const handleDifficultyChange = (difficulty: string) => {
@@ -102,7 +102,7 @@ export const GameSettings = () => {
       </Button>
 
       <AnimatePresence>
-        {isSettingsOpened && (
+        {isSettingsOpen && (
           <>
             <motion.div
               variants={{
