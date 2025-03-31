@@ -1,5 +1,9 @@
 @use "sass:map";
 
+.wrapper {
+  position: relative;
+}
+
 .gesture {
   width: 130px;
   aspect-ratio: 1 / 1;
@@ -70,6 +74,17 @@
       }
     }
   }
+}
+
+.pulse {
+  position: absolute;
+  width: 165px;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  background: white;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
 }
 
 @keyframes shine-lines {

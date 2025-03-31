@@ -11,9 +11,13 @@ import { useApp } from "../../hooks";
 
 interface GestureProps {
   gesture: GestureType;
+  isWinner?: boolean;
 }
 
-const Gesture: React.FC<GestureProps> = ({ gesture }) => {
+export const Gesture: React.FC<GestureProps> = ({
+  gesture,
+  isWinner = false,
+}) => {
   const { state } = useApp();
   const [playPop] = useSound(pop, {
     volume: 0.5 * state.context.settings.volume,
@@ -32,19 +36,34 @@ const Gesture: React.FC<GestureProps> = ({ gesture }) => {
   }, [gesture, playPop]);
 
   return (
-    <motion.div
-      animate={{ scale: 1 }}
-      initial={{ scale: 0 }}
-      className={`${styles.gesture} ${gestureStyles[gesture]}`}
-    ></motion.div>
+    <div className={styles.wrapper}>
+      {/* Three pulsating circles */}
+      {isWinner &&
+        [0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            className={styles.pulse}
+            animate={{
+              scale: [0.5, 1.7],
+              opacity: [0.1, 0],
+            }}
+            transition={{
+              duration: 1.75,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 0.4, // Staggered effect
+            }}
+          />
+        ))}
+      <motion.div
+        animate={{ scale: 1 }}
+        initial={{ scale: 0 }}
+        className={`${styles.gesture} ${gestureStyles[gesture]}`}
+      ></motion.div>
+    </div>
   );
 };
 
-export const Paper = () => <Gesture gesture="PAPER" />;
-export const Rock = () => <Gesture gesture="ROCK" />;
-export const Scissors = () => <Gesture gesture="SCISSORS" />;
-export const Lizard = () => <Gesture gesture="LIZARD" />;
-export const Spock = () => <Gesture gesture="SPOCK" />;
 export const Loading = () => (
   <div className={`${styles.gesture} ${styles.loading}`}></div>
 );

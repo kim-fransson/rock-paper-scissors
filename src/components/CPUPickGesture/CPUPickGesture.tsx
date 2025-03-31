@@ -1,20 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useApp } from "../../hooks";
-import { Paper, Rock, Scissors, Spock, Lizard } from "../Gesture";
+import { Gesture } from "../Gesture";
 
 import styles from "./CPUPickGesture.module.scss";
 
-const gestureMap = {
-  ROCK: <Rock />,
-  PAPER: <Paper />,
-  SCISSORS: <Scissors />,
-  SPOCK: <Spock />,
-  LIZARD: <Lizard />,
-};
-
 export const CPUPickGesture = () => {
   const { state, send } = useApp();
+
+  const isPlayerWinner = state.context.winner === state.context.player;
+  const isCpuWinner = state.context.winner === state.context.cpu;
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -27,12 +22,12 @@ export const CPUPickGesture = () => {
   return (
     <div className={styles.playerCpuGestureWrapper}>
       <div className={`${styles.textGestureWrapper} ${styles.player}`}>
-        {gestureMap[state.context.player!]}
+        <Gesture gesture={state.context.player!} isWinner={isPlayerWinner} />
         <span>you picked</span>
       </div>
 
       <div className={`${styles.textGestureWrapper} ${styles.cpu}`}>
-        {gestureMap[state.context.cpu!]}
+        <Gesture gesture={state.context.cpu!} isWinner={isCpuWinner} />
         <span>the house picked</span>
       </div>
     </div>
