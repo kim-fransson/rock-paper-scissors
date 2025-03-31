@@ -8,8 +8,10 @@ import styles from "./CPUPickGesture.module.scss";
 export const CPUPickGesture = () => {
   const { state, send } = useApp();
 
-  const isPlayerWinner = state.context.winner === state.context.player;
-  const isCpuWinner = state.context.winner === state.context.cpu;
+  const isPlayerWinner =
+    state.hasTag("gameOver") && state.context.winner === state.context.player;
+  const isCpuWinner =
+    state.hasTag("gameOver") && state.context.winner === state.context.cpu;
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
