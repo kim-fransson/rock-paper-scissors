@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
-import { useApp } from "../../hooks";
-import { Paper, Rock, Scissors, Spock, Lizard } from "../Gesture";
 
-import styles from "./CPUPickGesture.module.scss";
+import { Loading, Paper, Rock, Scissors, Spock, Lizard } from "../Gesture";
+
+import { useApp } from "../../hooks";
+
+import styles from "./CPUThinking.module.scss";
 
 const gestureMap = {
   ROCK: <Rock />,
@@ -13,13 +15,13 @@ const gestureMap = {
   LIZARD: <Lizard />,
 };
 
-export const CPUPickGesture = () => {
+export const CPUThinking = () => {
   const { state, send } = useApp();
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      send({ type: "gameOver" });
-    }, 1500);
+      send({ type: "cpu.loadingDone" });
+    }, 2500);
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -32,8 +34,8 @@ export const CPUPickGesture = () => {
       </div>
 
       <div className={`${styles.textGestureWrapper} ${styles.cpu}`}>
-        {gestureMap[state.context.cpu!]}
-        <span>the house picked</span>
+        <Loading />
+        <span>Thinking...</span>
       </div>
     </div>
   );

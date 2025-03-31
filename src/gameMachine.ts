@@ -13,6 +13,8 @@ export const gameMachine = setup({
     events: {} as
       | { type: "player.startGame" }
       | { type: "player.pickedGesture"; gesture: Gesture }
+      | { type: "cpu.loadingDone" }
+      | { type: "gameOver" }
       | { type: "player.updateSettings"; settings: Settings }
       | { type: "player.playAgain" },
   },
@@ -129,8 +131,9 @@ export const gameMachine = setup({
       initial: "waitingForCPU",
       states: {
         waitingForCPU: {
-          after: {
-            "2500": {
+          target: "cpuPickedGesture",
+          on: {
+            "cpu.loadingDone": {
               target: "cpuPickedGesture",
             },
           },
@@ -140,8 +143,8 @@ export const gameMachine = setup({
           tags: "waiting",
         },
         cpuPickedGesture: {
-          after: {
-            "2500": [
+          on: {
+            gameOver: [
               {
                 target: "#rockPaperScissorGame.win",
                 guard: {

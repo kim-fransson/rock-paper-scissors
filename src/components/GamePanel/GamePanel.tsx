@@ -1,5 +1,6 @@
 import { useApp } from "../../hooks";
 import { CPUPickGesture } from "../CPUPickGesture";
+import { CPUThinking } from "../CPUThinking";
 import { PickGesture } from "../PickSymbol";
 import { PlayAgain } from "../PlayAgain";
 import { StartGame } from "../StartGame";
@@ -17,7 +18,7 @@ export const GamePanel = () => {
         return <PickGesture />;
 
       case state.matches("cpuPickGesture"):
-        return <CPUPickGesture />;
+        return state.hasTag("waiting") ? <CPUThinking /> : <CPUPickGesture />;
 
       case state.hasTag("gameOver"):
         return (

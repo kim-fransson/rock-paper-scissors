@@ -1,0 +1,33 @@
+.playerCpuGestureWrapper {
+  grid-column: 1 / span 2;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.textGestureWrapper {
+  position: relative;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 2rem;
+  text-align: center;
+  letter-spacing: 0.1172rem;
+  text-transform: uppercase;
+  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.196706);
+
+  > span {
+    position: absolute;
+    text-wrap: nowrap;
+    left: 50%;
+    translate: -50% 0;
+    margin-top: 20px;
+  }
+
+  &.player {
+    justify-self: start;
+  }
+
+  &.cpu {
+    justify-self: end;
+  }
+}
