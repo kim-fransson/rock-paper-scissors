@@ -6,16 +6,18 @@ import {
   ModalOverlay,
 } from "react-aria-components";
 import { FaXmark } from "react-icons/fa6";
+import { motion } from "motion/react";
+import { useState } from "react";
 
 import rules from "../../assets/image-rules.svg";
 import spicyRules from "../../assets/image-rules-bonus.svg";
-
 import { Button } from "../ui";
+import { useApp } from "../../hooks";
+import pop1 from "../../assets/pop-1.wav";
+import pop3 from "../../assets/pop-3.wav";
 
 import styles from "./Rules.module.scss";
-import { useState } from "react";
-import { motion } from "motion/react";
-import { useApp } from "../../hooks";
+import useSound from "use-sound";
 
 type AnimationState = "unmounted" | "hidden" | "visible";
 
@@ -25,13 +27,23 @@ const MotionModal = motion.create(Modal);
 export const Rules = () => {
   const [animation, setAnimation] = useState<AnimationState>("unmounted");
   const { state } = useApp();
+  const volume = state.context.settings.volume;
+  const [playOpen] = useSound(pop1, { volume: 0.5 * volume });
+  const [playClose] = useSound(pop3, { volume: 0.5 * volume });
 
   const {
     settings: { gameMode },
   } = state.context;
 
-  const handleOpenChange = (isOpen: boolean) =>
-    setAnimation(isOpen ? "visible" : "hidden");
+  const handleOpenChange = (isOpen: boolean) => {
+    if (isOpen) {
+      playOpen();
+      setAnimation("visible");
+    } else {
+      playClose();
+      setAnimation("hidden");
+    }
+  };
 
   return (
     <DialogTrigger onOpenChange={handleOpenChange}>

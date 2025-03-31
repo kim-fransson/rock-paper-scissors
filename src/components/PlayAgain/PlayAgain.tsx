@@ -7,6 +7,7 @@ import { useWindowSize } from "react-use";
 import winSound from "../../assets/win.mp3";
 import loseSound from "../../assets/lose.wav";
 import drawSound from "../../assets/draw.wav";
+import bubble from "../../assets/bubble.wav";
 
 import { Button } from "../ui";
 
@@ -29,13 +30,20 @@ export const PlayAgain = () => {
   const { width, height } = useWindowSize();
   const { state, send } = useApp();
 
-  const [playGameOver, { stop }] = useSound(soundMap[state.value as string], {
+  const [playGameOver, { stop: stopGameOver }] = useSound(
+    soundMap[state.value as string],
+    {
+      volume: 0.5 * state.context.settings.volume,
+    }
+  );
+  const [playBubble] = useSound(bubble, {
     volume: 0.5 * state.context.settings.volume,
   });
 
   const handlePlayAgain = () => {
+    playBubble();
     send({ type: "player.playAgain" });
-    stop();
+    stopGameOver();
   };
 
   useEffect(() => {

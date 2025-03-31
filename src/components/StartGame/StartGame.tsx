@@ -1,12 +1,17 @@
+import useSound from "use-sound";
 import { useApp } from "../../hooks";
 import { Button } from "../ui";
-
+import bubble from "../../assets/bubble.wav";
 import styles from "./StartGame.module.scss";
 
 export const StartGame = () => {
-  const { send } = useApp();
+  const { send, state } = useApp();
+  const [playBubble] = useSound(bubble, {
+    volume: 0.5 * state.context.settings.volume,
+  });
 
   const handleStartGame = () => {
+    playBubble();
     send({ type: "player.startGame" });
   };
   return (
