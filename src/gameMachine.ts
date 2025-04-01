@@ -15,6 +15,7 @@ export const gameMachine = setup({
       | { type: "player.pickedGesture"; gesture: Gesture }
       | { type: "cpu.loadingDone" }
       | { type: "gameOver" }
+      | { type: "player.resetGame" }
       | { type: "player.updateSettings"; settings: Settings }
       | { type: "player.playAgain" },
   },
@@ -109,6 +110,9 @@ export const gameMachine = setup({
           return event.settings;
         },
       }),
+    },
+    "player.resetGame": {
+      actions: assign(() => ({ score: 0 })),
     },
   },
   states: {

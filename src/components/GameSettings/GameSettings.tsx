@@ -90,6 +90,14 @@ export const GameSettings = () => {
     }
   };
 
+  const handleResetGame = () => {
+    playBubble();
+    send({
+      type: "player.resetGame",
+    });
+    handleOnOpenChange();
+  };
+
   return (
     <DialogTrigger>
       <Button
@@ -183,6 +191,14 @@ export const GameSettings = () => {
                   <div className={styles.indicator} />
                   Activate Sound
                 </Switch>
+
+                <Button
+                  onPress={handleResetGame}
+                  className={styles.resetBtn}
+                  variant="destructive"
+                >
+                  RESET
+                </Button>
               </Dialog>
             </MotionPopover>
           </>

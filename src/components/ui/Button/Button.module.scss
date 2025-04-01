@@ -10,12 +10,36 @@
   line-height: 1.1875rem;
   letter-spacing: 0.1563rem;
   transition: color 200ms ease-out;
+  outline: none;
 
   &.primary {
     height: 48px;
     min-width: 220px;
     background: linear-gradient(0deg, #f3f3f3 0%, #ffffff 100%);
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.196706);
+
+    &[data-hovered] {
+      color: #de4762;
+    }
+  }
+
+  &.destructive {
+    height: 48px;
+    min-width: 100px;
+    background: #de4762;
+    color: white;
+    border: solid 2px transparent;
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--dark-text);
+      outline-offset: 2px;
+    }
+
+    &[data-hovered] {
+      color: #de4762;
+      background: none;
+      border-color: #de4762;
+    }
   }
 
   &.secondary {

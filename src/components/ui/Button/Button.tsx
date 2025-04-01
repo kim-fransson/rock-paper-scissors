@@ -7,7 +7,7 @@ import clsx from "clsx";
 import styles from "./Button.module.scss";
 
 interface ButtonProps extends AriaButtonProps {
-  variant?: "primary" | "secondary" | "icon";
+  variant?: "primary" | "secondary" | "icon" | "destructive";
   className?: string;
 }
 
