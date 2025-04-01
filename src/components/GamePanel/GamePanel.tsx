@@ -1,7 +1,7 @@
 import { useApp } from "../../hooks";
 import { CPUPickGesture } from "../CPUPickGesture";
 import { CPUThinking } from "../CPUThinking";
-import { PickGesture } from "../PickSymbol";
+import { PickGesture } from "../PickGesture";
 import { PlayAgain } from "../PlayAgain";
 import { StartGame } from "../StartGame";
 

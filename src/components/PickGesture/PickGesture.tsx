@@ -6,8 +6,8 @@ import bgTriangle from "../../assets/bg-triangle.svg";
 import bgPentagon from "../../assets/bg-pentagon.svg";
 import { Gesture } from "../../app.model";
 
-import styles from "./PickGesture.module.scss";
 import { useApp } from "../../hooks";
+import styles from "./PickGesture.module.scss";
 
 const GESTURES = {
   default: ["PAPER", "ROCK", "SCISSORS"],
