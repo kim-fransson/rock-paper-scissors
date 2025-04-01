@@ -14,6 +14,7 @@
 
   @include for-tablet {
     min-width: 275px;
+    grid-column: 1 / span 3;
   }
 }
 

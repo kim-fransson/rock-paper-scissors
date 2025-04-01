@@ -103,6 +103,7 @@
   will-change: transform, opacity;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+  pointer-events: none;
 
   @include for-tablet {
     width: 260px;

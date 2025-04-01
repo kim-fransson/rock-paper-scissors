@@ -1,8 +1,15 @@
+@import "../../mixins.scss";
+
 .playerCpuGestureWrapper {
   grid-column: 1 / span 2;
   display: flex;
   align-self: center;
   justify-content: space-between;
+
+  @include for-tablet {
+    grid-column: 1 / span 3;
+    grid-row-start: 1;
+  }
 }
 
 .textGestureWrapper {
