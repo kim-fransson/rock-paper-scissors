@@ -85,6 +85,9 @@
   top: 50%;
   left: 50%;
   translate: -50% -50%;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 @keyframes shine-lines {

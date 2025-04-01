@@ -41,11 +41,10 @@ export const Gesture: React.FC<GestureProps> = ({
       {isWinner &&
         [0, 1, 2].map((i) => (
           <motion.div
-            key={i}
             className={styles.pulse}
             animate={{
               scale: [0.5, 2],
-              opacity: [0.1, 0],
+              opacity: [0.2, 0],
             }}
             transition={{
               duration: 1.75,
@@ -53,6 +52,7 @@ export const Gesture: React.FC<GestureProps> = ({
               repeatType: "loop",
               ease: "easeOut",
               delay: i * 0.4, // Staggered effect
+              repeatDelay: 0.4,
             }}
           />
         ))}
