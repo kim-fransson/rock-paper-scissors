@@ -1,3 +1,5 @@
+@import "./mixins.scss";
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -7,4 +9,10 @@
   min-height: 100svh;
   padding: 32px;
   overflow-x: hidden;
+
+  @include for-tablet {
+    max-width: 700px;
+    margin: 0 auto;
+    overflow-x: visible;
+  }
 }

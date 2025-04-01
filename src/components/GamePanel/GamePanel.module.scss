@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .gamePanel {
   align-self: stretch;
   position: relative;
@@ -5,4 +7,7 @@
   row-gap: 20px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+
+  @include for-tablet {
+  }
 }

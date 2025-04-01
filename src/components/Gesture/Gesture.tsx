@@ -41,6 +41,7 @@ export const Gesture: React.FC<GestureProps> = ({
       {isWinner &&
         [0, 1, 2].map((i) => (
           <motion.div
+            key={i}
             className={styles.pulse}
             animate={{
               scale: [0.5, 2],
