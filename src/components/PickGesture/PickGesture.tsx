@@ -10,8 +10,8 @@ import { useApp } from "../../hooks";
 import styles from "./PickGesture.module.scss";
 
 const GESTURES = {
-  default: ["PAPER", "ROCK", "SCISSORS"],
-  spicy: ["PAPER", "ROCK", "SCISSORS", "LIZARD", "SPOCK"],
+  default: ["SCISSORS", "PAPER", "ROCK"],
+  spicy: ["SCISSORS", "PAPER", "ROCK", "LIZARD", "SPOCK"],
 };
 
 const MotionButton = motion.create(Button);

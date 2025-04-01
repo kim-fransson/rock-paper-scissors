@@ -32,6 +32,12 @@
 .dialog {
   display: grid;
   gap: 16px;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--dark-text);
+    outline-offset: 8px;
+  }
 }
 
 .heading {
@@ -89,29 +95,19 @@
     width: 32px;
   }
 
-  // &[data-pressed]:before {
-  //   border-color: var(--border-color-pressed);
-  // }
-
   &[data-selected] {
     &.difficultyRadio:before {
-      // border-color: var(--highlight-background);
       border-width: 7px;
     }
     &.gameModeRadio:before {
-      // border-color: var(--highlight-background);
       border-width: 9px;
     }
-
-    // &[data-pressed]:before {
-    //   border-color: var(--highlight-background-pressed);
-    // }
   }
 
-  // &[data-focus-visible]:before {
-  //   outline: 2px solid var(--focus-ring-color);
-  //   outline-offset: 2px;
-  // }
+  &[data-focus-visible]:before {
+    outline: 2px solid var(--dark-text);
+    outline-offset: 2px;
+  }
 }
 
 .separator {
@@ -147,14 +143,6 @@
     }
   }
 
-  // &[data-pressed] .indicator {
-  //   border-color: var(--border-color-pressed);
-
-  //   &:before {
-  //     background: var(--highlight-background-pressed);
-  //   }
-  // }
-
   &[data-selected] {
     .indicator {
       background: var(--dark-text);
@@ -164,17 +152,10 @@
         transform: translateX(100%);
       }
     }
-
-    // &[data-pressed] {
-    //   .indicator {
-    //     border-color: var(--highlight-background-pressed);
-    //     background: var(--highlight-background-pressed);
-    //   }
-    // }
   }
 
-  // &[data-focus-visible] .indicator {
-  //   outline: 2px solid var(--focus-ring-color);
-  //   outline-offset: 2px;
-  // }
+  &[data-focus-visible] .indicator {
+    outline: 2px solid var(--dark-text);
+    outline-offset: 2px;
+  }
 }

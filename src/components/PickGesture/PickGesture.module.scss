@@ -28,6 +28,12 @@
   border-radius: 100%;
   color: var(--dark-text);
   cursor: pointer;
+  outline: 0;
+
+  &[data-focus-visible] {
+    outline: 2px solid #f9f9fa;
+    outline-offset: 4px;
+  }
 
   @include for-tablet {
     min-width: 200px;
