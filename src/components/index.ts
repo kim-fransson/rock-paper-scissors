@@ -6,6 +6,5 @@ export * from "./CPUPickGesture";
 export * from "./GameFooter";
 export * from "./GamePanel";
 export * from "./PlayAgain";
-export * from "./StartGame";
 export * from "./Gesture";
 export * from "./GameSettings";

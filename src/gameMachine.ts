@@ -11,7 +11,6 @@ export const gameMachine = setup({
       settings: Settings;
     },
     events: {} as
-      | { type: "player.startGame" }
       | { type: "player.pickedGesture"; gesture: Gesture }
       | { type: "cpu.loadingDone" }
       | { type: "gameOver" }
@@ -101,7 +100,7 @@ export const gameMachine = setup({
     },
   },
   id: "rockPaperScissorGame",
-  initial: "idle",
+  initial: "pickGesture",
   on: {
     "player.updateSettings": {
       actions: assign({
@@ -112,15 +111,11 @@ export const gameMachine = setup({
       }),
     },
     "player.resetGame": {
+      target: ".pickGesture",
       actions: assign(() => ({ score: 0 })),
     },
   },
   states: {
-    idle: {
-      on: {
-        "player.startGame": { target: "pickGesture" },
-      },
-    },
     pickGesture: {
       on: {
         "player.pickedGesture": {
