@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .currentScore {
   background: linear-gradient(0deg, #f3f3f3 0%, #ffffff 100%);
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.196706);
@@ -16,12 +18,26 @@
   text-transform: uppercase;
   color: var(--score-text);
 
+  @include for-tablet {
+    min-width: 150px;
+    height: 114px;
+    border-radius: 8px;
+
+    font-size: 1rem;
+    line-height: 1.1875rem;
+    letter-spacing: 0.1563rem;
+  }
+
   > span {
     font-weight: 700;
     font-size: 2.5rem;
     line-height: 2.5rem;
     text-align: center;
-
     color: var(--dark-text);
+
+    @include for-tablet {
+      font-size: 4rem;
+      line-height: 4rem;
+    }
   }
 }
