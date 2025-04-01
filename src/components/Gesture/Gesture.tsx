@@ -44,13 +44,14 @@ export const Gesture: React.FC<GestureProps> = ({
             key={i}
             className={styles.pulse}
             animate={{
-              scale: [0.5, 1.7],
+              scale: [0.5, 2],
               opacity: [0.1, 0],
             }}
             transition={{
               duration: 1.75,
               repeat: Infinity,
-              ease: "linear",
+              repeatType: "loop",
+              ease: "easeOut",
               delay: i * 0.4, // Staggered effect
             }}
           />
