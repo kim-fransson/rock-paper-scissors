@@ -51,6 +51,7 @@ export const Rules = () => {
         Rules
       </Button>
       <MotionModalOverlay
+        className={styles.modalOverlay}
         isDismissable
         isExiting={animation === "hidden"}
         onAnimationComplete={(animation) => {
@@ -67,10 +68,16 @@ export const Rules = () => {
         animate={animation}
       >
         <MotionModal
-          className={styles.modal}
           variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1 },
+            hidden: { opacity: 0, scale: 1 },
+            exit: { opacity: 0, scale: 1 },
+            visible: {
+              opacity: 1,
+              scale: [1, 1.1, 1], // Bounce effect
+              transition: {
+                duration: 0.3,
+              },
+            },
           }}
         >
           <Dialog className={styles.dialog}>
@@ -87,7 +94,7 @@ export const Rules = () => {
             <p className="sr-only">
               Rock beats Scissors, Scissors beats Paper, Paper beats Rock
             </p>
-            <Button variant="icon" slot="close">
+            <Button className={styles.closeBtn} variant="icon" slot="close">
               <FaXmark size={30} />
               <span className="sr-only">Close modal</span>
             </Button>

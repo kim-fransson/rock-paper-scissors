@@ -132,13 +132,7 @@ export const GameSettings = () => {
                     duration: 0.3,
                   },
                 },
-                exit: {
-                  opacity: [1, 1, 0],
-                  scale: [1, 0.9, 0], // Shrink and disappear
-                  transition: {
-                    duration: 0.3,
-                  },
-                },
+                exit: { opacity: 0, scale: 1 },
               }}
               initial="hidden"
               exit="exit"
