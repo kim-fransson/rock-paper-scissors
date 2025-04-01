@@ -1,4 +1,4 @@
-@import "../../mixins.scss";
+@use "../../mixins.scss" as *;
 
 .playerCpuGestureWrapper {
   grid-column: 1 / span 2;
