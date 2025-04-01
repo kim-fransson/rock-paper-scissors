@@ -10,6 +10,9 @@
 
   &.spicy {
     max-width: 220px;
+    @include for-tablet {
+      min-width: 325px;
+    }
   }
 
   @include for-tablet {
@@ -32,9 +35,17 @@
 
   &.spicy {
     min-width: 115px;
+
+    @include for-tablet {
+      min-width: 145px;
+    }
   }
   &.spicy::before {
     width: 85px;
+
+    @include for-tablet {
+      min-width: 110px;
+    }
   }
 
   &::before {
