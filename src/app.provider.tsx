@@ -4,7 +4,7 @@ import { gameMachine } from "./gameMachine";
 import { AppContext } from "./app.context";
 import { AppState } from "./app.model";
 
-const serializedState = localStorage.getItem("rps-state");
+const serializedState = localStorage.getItem("rps-app-state");
 let previousState: AppState;
 
 if (serializedState) {
@@ -17,7 +17,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   service.subscribe((state) => {
-    localStorage.setItem("rps-state", JSON.stringify(state));
+    localStorage.setItem("rps-app-state", JSON.stringify(state));
   });
 
   return (
