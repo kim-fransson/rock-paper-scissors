@@ -1,54 +1,26 @@
-# React + TypeScript + Vite
+# Rock Paper Scissors game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project designed from [frontendmentor.io](https://www.frontendmentor.io/)
 
-Currently, two official plugins are available:
+Live demo: [https://rock-paper-scissors.made-by-kim.com/](https://rock-paper-scissors.made-by-kim.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Preview
 
-## Expanding the ESLint configuration
+### Start
+![image](https://github.com/user-attachments/assets/20eae2c3-7229-46d0-b020-b525cccf9815)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Rules modal
+![image](https://github.com/user-attachments/assets/9faf6183-d234-4a0e-b638-ec9087f1df82)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Settings popover
+![image](https://github.com/user-attachments/assets/1a98ac57-8d9d-4451-a223-d056710e3c08)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### You win
+![image](https://github.com/user-attachments/assets/b20c6839-d048-48fc-8c88-c0d8c76e4f2d)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### CPU Win
+![image](https://github.com/user-attachments/assets/c879abb3-df19-4a3a-b148-0c3a3818e441)
+
+### Bonus mode
+![image](https://github.com/user-attachments/assets/d67dad52-1aaa-48c7-a6f3-a3bac4fb335f)
